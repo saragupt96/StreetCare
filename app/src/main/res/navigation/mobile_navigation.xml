@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.brightmindenrichment.street_care.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_visit"
+        android:name="org.brightmindenrichment.street_care.ui.visit.VisitFragment"
+        android:label="Visit"
+        tools:layout="@layout/fragment_visit" />
+
+    <fragment
+        android:id="@+id/nav_user"
+        android:name="org.brightmindenrichment.street_care.ui.user.UserFragment"
+        android:label="User"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_nav_user_to_nav_login"
+            app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_user_to_nav_sign_up"
+            app:destination="@id/nav_sign_up" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="org.brightmindenrichment.street_care.ui.user.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/nav_sign_up"
+        android:name="org.brightmindenrichment.street_care.ui.user.SignUpFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_sign_up" />
+</navigation>
