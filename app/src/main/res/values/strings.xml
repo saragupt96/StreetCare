@@ -7,6 +7,13 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Home / How to Help screen -->
+    <string name="howtohelp_toolkit_to_help">Your Toolkit to Help</string>
+    <string name="howtohelp_hot_to_help">How to Help</string>
+    <string name="howtohelp_start_now">Start Now</string>
+    <string name="hottohelp_how_to_videos">How-to Videos</string>
+    <string name="howtohelp_what_to_bring">What to Bring and Give</string>
+
     <string name="menu_home">How to Help</string>
     <string name="menu_visit">Visit</string>
     <string name="menu_community">Community</string>
