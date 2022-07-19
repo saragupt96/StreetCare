@@ -50,6 +50,7 @@
     <string name="error_password_must_match">Passwords must match.</string>
     <string name="error_missing_required_data">Missing required information.</string>
     <string name="error_failed_to_create_user">Failed to create account.  Try again later.</string>
+    <string name="picture_of_people_helping">Picture of people helping.</string>
 
 
 </resources>
