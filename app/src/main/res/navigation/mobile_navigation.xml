@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="org.brightmindenrichment.street_care.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_startNowFragment"
+            app:destination="@id/nav_start_now" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_visit"
@@ -47,4 +51,18 @@
         android:name="org.brightmindenrichment.street_care.ui.user.SignUpFragment"
         android:label="Sign Up"
         tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/nav_start_now"
+        android:name="org.brightmindenrichment.street_care.ui.home.start_now.StartNowFragment"
+        android:label="How to Help"
+        tools:layout="@layout/fragment_start_now" >
+        <action
+            android:id="@+id/action_nav_start_now_to_beforeFragment"
+            app:destination="@id/nav_before" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_before"
+        android:name="org.brightmindenrichment.street_care.ui.home.start_now.tabs.BeforeFragment"
+        android:label="Back"
+        tools:layout="@layout/fragment_before" />
 </navigation>

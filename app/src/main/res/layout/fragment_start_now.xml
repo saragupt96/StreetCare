@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.start_now.StartNowFragment">
+
+<Button
+    android:id="@+id/button_before"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/before"
+    android:textSize="20sp"
+    android:textAllCaps="false"
+    android:backgroundTint="@color/white"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/button_on_the_street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/on_the_street"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/white"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="textStart"/>
+    <Button
+        android:id="@+id/button_after"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/after"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/white"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="textStart"/>
+</LinearLayout>

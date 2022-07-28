@@ -13,6 +13,9 @@
     <string name="howtohelp_start_now">Start Now</string>
     <string name="hottohelp_how_to_videos">How-to Videos</string>
     <string name="howtohelp_what_to_bring">What to Bring and Give</string>
+    <string name="before">Before</string>
+    <string name="on_the_street">On The Street</string>
+    <string name="after">After</string>
 
     <string name="menu_home">How to Help</string>
     <string name="menu_visit">Visit</string>
@@ -22,7 +25,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="user_button_sign_out">Sign Out</string>
     <string name="user_button_remove_account">Remove Account</string>
@@ -51,6 +53,7 @@
     <string name="error_missing_required_data">Missing required information.</string>
     <string name="error_failed_to_create_user">Failed to create account.  Try again later.</string>
     <string name="picture_of_people_helping">Picture of people helping.</string>
+
 
 
 </resources>
