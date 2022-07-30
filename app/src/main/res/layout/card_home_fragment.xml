@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
-            android:src="@drawable/start_now" />
+            android:src="@drawable/start_now"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,7 +39,8 @@
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
             android:foregroundGravity="fill_horizontal"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
@@ -57,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
 
-            android:src="@drawable/soap" />
+            android:src="@drawable/soap"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +78,8 @@
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
             android:foregroundGravity="fill_horizontal"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            tools:ignore="ContentDescription"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -94,7 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
-            android:src="@drawable/how_to_videos" />
+            android:src="@drawable/how_to_videos"
+            tools:ignore="ContentDescription"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -111,7 +117,8 @@
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
             android:foregroundGravity="fill_horizontal"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            tools:ignore="ContentDescription"/>
 
     </androidx.cardview.widget.CardView>
 

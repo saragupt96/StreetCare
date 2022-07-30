@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.start_now.tabs.BeforeFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/before_page_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="hello Beforefragment"
-        android:textSize="24sp"
-        android:layout_gravity="center_vertical"
-        android:textColor="@color/teal_200"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/para1_before_page"
+        android:textSize="16sp" />
+    <include layout="@layout/card_before_fragment"/>
+    </LinearLayout>
 
 
-</FrameLayout>
+</ScrollView>
