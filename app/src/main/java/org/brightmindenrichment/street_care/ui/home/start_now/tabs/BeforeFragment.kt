@@ -1,16 +1,19 @@
 package org.brightmindenrichment.street_care.ui.home.start_now.tabs
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.cardview.widget.CardView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
+import org.brightmindenrichment.street_care.databinding.CardBeforeFragmentBinding
+import org.brightmindenrichment.street_care.databinding.FragmentBeforeBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,19 +25,13 @@ class BeforeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val TAG : String = "Before Fragment"
 
-    private lateinit var letSomeoneKnowButton: ImageView
-    private lateinit var letSomeoneKnowExpandableLayout: LinearLayout
-    private lateinit var letSomeoneKnowCardView: CardView
-    private lateinit var howToPrepareButton: ImageView
-    private lateinit var howToPrepareExpandableLayout: LinearLayout
-    private lateinit var howToPrepareCardView: CardView
-    private lateinit var mustCarryButton: ImageView
-    private lateinit var mustCarryExpandableLayout: LinearLayout
-    private lateinit var mustCarryCardView: CardView
-    private lateinit var planAnIntroButton: ImageView
-    private lateinit var planAnIntroExpandableLayout: LinearLayout
-    private lateinit var planAnIntroCardView: CardView
+    private var  _binding : FragmentBeforeBinding? = null
+    private val binding get() = _binding!!
+
+
+private lateinit var includedView : CardBeforeFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,41 +46,30 @@ class BeforeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_before, container, false)
+        _binding = FragmentBeforeBinding.inflate(inflater, container, false)
+         val view : View = binding.root
+        includedView = binding.cardBeforeFragment
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        letSomeoneKnowButton = view.findViewById(R.id.image_let_someone_know)
-        letSomeoneKnowCardView = view.findViewById(R.id.cardView_let_someone_know)
-        letSomeoneKnowExpandableLayout = view.findViewById(R.id.linearlayout_let_someone_know)
-
-        howToPrepareButton = view.findViewById(R.id.image_how_to_prepare)
-        howToPrepareCardView = view.findViewById(R.id.cardView_how_to_prepare)
-        howToPrepareExpandableLayout = view.findViewById(R.id.linearlayout_how_to_prepare)
-
-        mustCarryButton = view.findViewById(R.id.image_must_carry)
-        mustCarryCardView = view.findViewById(R.id.cardView_must_carry)
-        mustCarryExpandableLayout = view.findViewById(R.id.linearlayout_must_carry)
-
-        planAnIntroButton = view.findViewById(R.id.image_plan_an_intro)
-        planAnIntroCardView = view.findViewById(R.id.cardView_plan_an_intro)
-        planAnIntroExpandableLayout = view.findViewById(R.id.linearlayout_plan_an_intro)
 
 
-        letSomeoneKnowButton.setOnClickListener{
+       includedView.imageLetSomeoneKnow.setOnClickListener{
             showLetSomeoneKnowDetails()
         }
 
-        howToPrepareButton.setOnClickListener {
+        includedView.imageHowToPrepare.setOnClickListener {
             showHowToPrepareDetails()
         }
 
-        mustCarryButton.setOnClickListener {
+        includedView.imageMustCarry.setOnClickListener {
             showMustCarryDetails()
         }
 
-        planAnIntroButton.setOnClickListener {
+        includedView.imagePlanAnIntro.setOnClickListener {
             showPlanAnIntroDetails()
         }
 
@@ -92,56 +78,63 @@ class BeforeFragment : Fragment() {
 
 
     private fun showLetSomeoneKnowDetails() {
-        if (letSomeoneKnowExpandableLayout.visibility == View.GONE) {
-            TransitionManager.beginDelayedTransition(letSomeoneKnowCardView, AutoTransition())
-            letSomeoneKnowExpandableLayout.visibility = View.VISIBLE
-            letSomeoneKnowButton.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
+        if (includedView.linearlayoutLetSomeoneKnow.visibility == View.GONE) {
+            TransitionManager.beginDelayedTransition(includedView.cardViewLetSomeoneKnow, AutoTransition())
+            includedView.linearlayoutLetSomeoneKnow.visibility = View.VISIBLE
+            includedView.imageLetSomeoneKnow.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
+            //fetchDataFromDatabase()
 
         } else {
-            TransitionManager.beginDelayedTransition(letSomeoneKnowCardView, AutoTransition())
-            letSomeoneKnowExpandableLayout.visibility = View.GONE
-            letSomeoneKnowButton.setImageResource(R.drawable.ic_baseline_add_circle_24)
+            TransitionManager.beginDelayedTransition(includedView.cardViewLetSomeoneKnow, AutoTransition())
+            includedView.linearlayoutLetSomeoneKnow.visibility = View.GONE
+            includedView.imageLetSomeoneKnow.setImageResource(R.drawable.ic_baseline_add_circle_24)
 
         }
     }
 
     private fun showHowToPrepareDetails() {
-        if(howToPrepareExpandableLayout.visibility == View.GONE){
-            TransitionManager.beginDelayedTransition(howToPrepareCardView, AutoTransition())
-            howToPrepareExpandableLayout.visibility = View.VISIBLE
-            howToPrepareButton.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
+        if(includedView.linearlayoutHowToPrepare.visibility == View.GONE){
+            TransitionManager.beginDelayedTransition(includedView.cardViewHowToPrepare, AutoTransition())
+            includedView.linearlayoutHowToPrepare.visibility = View.VISIBLE
+            includedView.imageHowToPrepare.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
 
         }else{
-            TransitionManager.beginDelayedTransition(howToPrepareCardView, AutoTransition())
-            howToPrepareExpandableLayout.visibility = View.GONE
-            howToPrepareButton.setImageResource(R.drawable.ic_baseline_add_circle_24)
+            TransitionManager.beginDelayedTransition(includedView.cardViewHowToPrepare, AutoTransition())
+            includedView.linearlayoutHowToPrepare.visibility = View.GONE
+            includedView.imageHowToPrepare.setImageResource(R.drawable.ic_baseline_add_circle_24)
         }
 
     }
 
     private fun showMustCarryDetails() {
-        if(mustCarryExpandableLayout.visibility == View.GONE){
-            TransitionManager.beginDelayedTransition(mustCarryCardView, AutoTransition())
-            mustCarryExpandableLayout.visibility = View.VISIBLE
-            mustCarryButton.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
+        if(includedView.linearlayoutMustCarry.visibility == View.GONE){
+            TransitionManager.beginDelayedTransition(includedView.cardViewMustCarry, AutoTransition())
+            includedView.linearlayoutMustCarry.visibility = View.VISIBLE
+            includedView.imageMustCarry.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
         }else{
-            TransitionManager.beginDelayedTransition(mustCarryCardView, AutoTransition())
-            mustCarryExpandableLayout.visibility = View.GONE
-            mustCarryButton.setImageResource(R.drawable.ic_baseline_add_circle_24)
+            TransitionManager.beginDelayedTransition(includedView.cardViewMustCarry, AutoTransition())
+            includedView.linearlayoutMustCarry.visibility = View.GONE
+            includedView.imageMustCarry.setImageResource(R.drawable.ic_baseline_add_circle_24)
         }
 
     }
     private fun showPlanAnIntroDetails() {
-        if(planAnIntroExpandableLayout.visibility == View.GONE){
-            TransitionManager.beginDelayedTransition(planAnIntroCardView, AutoTransition())
-            planAnIntroExpandableLayout.visibility = View.VISIBLE
-            planAnIntroButton.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
+        if(includedView.linearlayoutPlanAnIntro.visibility == View.GONE){
+            TransitionManager.beginDelayedTransition(includedView.cardViewPlanAnIntro, AutoTransition())
+            includedView.linearlayoutPlanAnIntro.visibility = View.VISIBLE
+            includedView.imagePlanAnIntro.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
         }else{
-            TransitionManager.beginDelayedTransition(planAnIntroCardView, AutoTransition())
-            planAnIntroExpandableLayout.visibility = View.GONE
-            planAnIntroButton.setImageResource(R.drawable.ic_baseline_add_circle_24)
+            TransitionManager.beginDelayedTransition(includedView.cardViewPlanAnIntro, AutoTransition())
+            includedView.linearlayoutPlanAnIntro.visibility = View.GONE
+            includedView.imagePlanAnIntro.setImageResource(R.drawable.ic_baseline_add_circle_24)
         }
 
+    } // end of showPlanAnIntroDetails method
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 
@@ -164,4 +157,4 @@ class BeforeFragment : Fragment() {
                 }
             }
     }
-}
+} //end of class
