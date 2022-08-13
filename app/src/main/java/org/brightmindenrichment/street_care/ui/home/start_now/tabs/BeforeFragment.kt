@@ -6,11 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.CardBeforeFragmentBinding
 import org.brightmindenrichment.street_care.databinding.FragmentBeforeBinding
@@ -25,13 +24,14 @@ class BeforeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val TAG : String = "Before Fragment"
+    private val TAG: String = "Before Fragment"
+    private lateinit var viewModel: BeforeViewModel
 
-    private var  _binding : FragmentBeforeBinding? = null
+    private var _binding :FragmentBeforeBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var includedView: CardBeforeFragmentBinding
 
-private lateinit var includedView : CardBeforeFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,14 +50,16 @@ private lateinit var includedView : CardBeforeFragmentBinding
          val view : View = binding.root
         includedView = binding.cardBeforeFragment
 
+        viewModel = ViewModelProvider(this)[BeforeViewModel::class.java]
+
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-       includedView.imageLetSomeoneKnow.setOnClickListener{
+        showIntroDetails()
+        includedView.imageLetSomeoneKnow.setOnClickListener {
             showLetSomeoneKnowDetails()
         }
 
@@ -76,13 +78,13 @@ private lateinit var includedView : CardBeforeFragmentBinding
     }
 
 
-
     private fun showLetSomeoneKnowDetails() {
         if (includedView.linearlayoutLetSomeoneKnow.visibility == View.GONE) {
             TransitionManager.beginDelayedTransition(includedView.cardViewLetSomeoneKnow, AutoTransition())
             includedView.linearlayoutLetSomeoneKnow.visibility = View.VISIBLE
+            displayLetSomeoneKnowDetails()
             includedView.imageLetSomeoneKnow.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
-            //fetchDataFromDatabase()
+
 
         } else {
             TransitionManager.beginDelayedTransition(includedView.cardViewLetSomeoneKnow, AutoTransition())
@@ -96,6 +98,7 @@ private lateinit var includedView : CardBeforeFragmentBinding
         if(includedView.linearlayoutHowToPrepare.visibility == View.GONE){
             TransitionManager.beginDelayedTransition(includedView.cardViewHowToPrepare, AutoTransition())
             includedView.linearlayoutHowToPrepare.visibility = View.VISIBLE
+            displayHowToPrepareDetails()
             includedView.imageHowToPrepare.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
 
         }else{
@@ -110,6 +113,7 @@ private lateinit var includedView : CardBeforeFragmentBinding
         if(includedView.linearlayoutMustCarry.visibility == View.GONE){
             TransitionManager.beginDelayedTransition(includedView.cardViewMustCarry, AutoTransition())
             includedView.linearlayoutMustCarry.visibility = View.VISIBLE
+            displayMustCarryDetails()
             includedView.imageMustCarry.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
         }else{
             TransitionManager.beginDelayedTransition(includedView.cardViewMustCarry, AutoTransition())
@@ -118,10 +122,12 @@ private lateinit var includedView : CardBeforeFragmentBinding
         }
 
     }
+
     private fun showPlanAnIntroDetails() {
         if(includedView.linearlayoutPlanAnIntro.visibility == View.GONE){
             TransitionManager.beginDelayedTransition(includedView.cardViewPlanAnIntro, AutoTransition())
             includedView.linearlayoutPlanAnIntro.visibility = View.VISIBLE
+            displayPlanAnIntroDetails()
             includedView.imagePlanAnIntro.setImageResource(R.drawable.ic_baseline_do_not_disturb_on_24)
         }else{
             TransitionManager.beginDelayedTransition(includedView.cardViewPlanAnIntro, AutoTransition())
@@ -130,6 +136,39 @@ private lateinit var includedView : CardBeforeFragmentBinding
         }
 
     } // end of showPlanAnIntroDetails method
+
+
+    private fun showIntroDetails(){
+        viewModel.beforePageLiveData.observe(viewLifecycleOwner, Observer { beforeAfterData ->
+            binding.beforePageIntro.text = beforeAfterData.beforeIntro
+        })
+    }
+
+    private fun displayLetSomeoneKnowDetails(){
+        includedView.tvLetSomeoneKnow.text =
+            viewModel.beforePageLiveData.value?.getBeforePageContent("para2")
+    }
+
+    private fun displayHowToPrepareDetails(){
+        includedView.tvHowToPrepare.text =
+            viewModel.beforePageLiveData.value?.getBeforePageContent("para3")
+
+
+    }
+
+    private fun displayMustCarryDetails(){
+        includedView.tvMustCarry.text =
+            viewModel.beforePageLiveData.value?.getBeforePageContent("para4")
+
+    }
+
+    private fun displayPlanAnIntroDetails() {
+        includedView.tvPlanAnIntro.text =
+            viewModel.beforePageLiveData.value?.getBeforePageContent("para5")
+
+        //documentSnapshot.data?.get("para5") as CharSequence
+
+    }
 
 
     override fun onDestroyView() {
