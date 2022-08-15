@@ -43,7 +43,9 @@
             android:textColor="@color/light_gray"
             android:textSize="@dimen/home_screen_toolkit_to_help"
             />
-        <include layout="@layout/card_home_fragment"/>
+        <include
+            android:id="@+id/card_home_fragment"
+            layout="@layout/card_home_fragment"/>
 
 
     </LinearLayout>

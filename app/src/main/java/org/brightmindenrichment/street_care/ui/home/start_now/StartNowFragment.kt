@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import org.brightmindenrichment.street_care.R
+import org.brightmindenrichment.street_care.databinding.FragmentStartNowBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,9 +25,9 @@ class StartNowFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-     private lateinit var before : Button
-     private lateinit var onTheStreet : Button
-     private lateinit var after : Button
+    private var _binding: FragmentStartNowBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,29 +42,32 @@ class StartNowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_start_now, container, false)
+        _binding = FragmentStartNowBinding.inflate(inflater, container, false)
+        return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        before = view.findViewById(R.id.button_before)
-        onTheStreet = view.findViewById(R.id.button_on_the_street)
-        after = view.findViewById(R.id.button_after)
 
-
-        before.setOnClickListener(){
+        binding.buttonBefore.setOnClickListener {
             findNavController().navigate(R.id.action_nav_start_now_to_beforeFragment)
 
         }
 
-        onTheStreet.setOnClickListener(){
+        binding.buttonOnTheStreet.setOnClickListener {
 
         }
 
-        after.setOnClickListener(){
+        binding.buttonAfter.setOnClickListener {
 
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

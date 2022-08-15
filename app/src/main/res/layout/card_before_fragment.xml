@@ -48,7 +48,6 @@
                 android:id="@+id/tv_let_someone_know"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/para1_before_page"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"/>
 
@@ -89,9 +88,9 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_how_to_prepare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/para1_before_page"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"/>
 
@@ -132,9 +131,9 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_must_carry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/para1_before_page"
                 android:layout_marginTop="16dp"
                 android:textSize="16sp"/>
 
@@ -175,12 +174,11 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_plan_an_intro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textSize="16sp"
-
-                android:text="@string/para1_before_page" />
+                android:textSize="16sp"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
