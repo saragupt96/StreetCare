@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import org.brightmindenrichment.street_care.R
+import org.brightmindenrichment.street_care.YouTube.YouTubeController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -102,6 +105,27 @@ class UserFragment : Fragment() {
 
     private fun buttonRemoveAccountOnClick() {
 
+
+//        var controller = YouTubeController()
+//
+//        val errorHandler = CoroutineExceptionHandler { _, exception ->
+//            AlertDialog.Builder(this.requireContext()).setTitle("Error...")
+//                .setMessage(exception.message)
+//                .setPositiveButton(android.R.string.ok) { _, _ -> }
+//                .setIcon(android.R.drawable.ic_dialog_alert)
+//                .show()
+//        }
+//        controller.refresh("PLh7GZtyt8qiLKwO_WoE0Vmcu6UMV1AtV9", errorHandler) {
+//            Log.d("BME", "Got data from youtube")
+//
+//            if (controller.playlist != null) {
+//                for (item in controller.playlist!!.items) {
+//                    Log.d("BME", item.snippet.title)
+//                    Log.d("BME", item.contentDetails.videoId)
+//                    Log.d("BME", item.snippet.thumbnails.standard.url)
+//                }
+//            }
+//        }
         currentUser?.delete()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 currentUser = null

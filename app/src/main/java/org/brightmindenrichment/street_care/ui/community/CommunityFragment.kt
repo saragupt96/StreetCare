@@ -2,16 +2,16 @@ package org.brightmindenrichment.street_care.ui.community
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.Toolbar
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +28,7 @@ class CommunityFragment : Fragment() {
 //    private var param1: String? = null
 //    private var param2: String? = null
 
-    private lateinit var buttonTestFirestore: Button
+    private lateinit var buttonAdd: ImageButton
 
     private val eventDataAdapter = EventDataAdapter()
 
@@ -53,7 +53,7 @@ class CommunityFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        buttonTestFirestore = view.findViewById<Button>(R.id.buttonTestFirestore)
+
 
         if (Firebase.auth.currentUser != null) {
 
@@ -68,17 +68,55 @@ class CommunityFragment : Fragment() {
             //}
 
             // example refresh
-            //eventDataAdapter.refresh {
-            //    for (event in this.eventDataAdapter.events) {
-            //        Log.d("BME", "${event.title} ${event.date} ${event.liked}")
-            //    }
-            //}
+            eventDataAdapter.refresh {
+                for (event in this.eventDataAdapter.events) {
+                    Log.d("BME", "${event.title} ${event.date} ${event.liked}")
+                }
+            }
         }
         else {
             Log.d("BME", "not logged in")
         }
 
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("BME", "onResume")
+
+        val toolbar = activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        if (toolbar == null) {
+            Log.d("BME", "Did not find toolbar")
+        }
+        else {
+            buttonAdd = ImageButton(this.context)
+            buttonAdd.setBackgroundResource(R.drawable.ic_menu_add)
+            val l3 = Toolbar.LayoutParams(
+                Toolbar.LayoutParams.WRAP_CONTENT,
+                Toolbar.LayoutParams.WRAP_CONTENT
+            )
+            l3.gravity = Gravity.RIGHT
+            buttonAdd.layoutParams = l3
+            toolbar.addView(buttonAdd)
+        }
+    }
+
+
+    override fun onDetach() {
+        super.onDetach()
+
+        val toolbar = activity?.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        if (toolbar == null) {
+            Log.d("BME", "Did not find toolbar")
+        }
+        else {
+            if (buttonAdd != null) {
+                toolbar.removeView(buttonAdd)
+            }
+        }
+    }
+
 
 
 } // end class
