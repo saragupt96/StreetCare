@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_startNowFragment"
             app:destination="@id/nav_start_now" />
+        <action
+            android:id="@+id/action_nav_home_to_howToVideosFragment"
+            app:destination="@id/howToVideosFragment" />
     </fragment>
 
     <fragment
@@ -65,4 +68,9 @@
         android:name="org.brightmindenrichment.street_care.ui.home.start_now.tabs.BeforeFragment"
         android:label="Back"
         tools:layout="@layout/fragment_before" />
+    <fragment
+        android:id="@+id/howToVideosFragment"
+        android:name="org.brightmindenrichment.street_care.ui.home.how_to_videos.HowToVideosFragment"
+        android:label="How to Help"
+        tools:layout="@layout/fragment_how_to_videos" />
 </navigation>

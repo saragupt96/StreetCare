@@ -12,7 +12,7 @@ class SliderAdapter(imageArray: Array<Int>) :
     SliderViewAdapter<SliderAdapter.SliderViewHolder>() {
     private val _imageArray = imageArray
 
-    public class SliderViewHolder(itemView: View?) : SliderViewAdapter.ViewHolder(itemView) {
+  class SliderViewHolder(itemView: View?) : SliderViewAdapter.ViewHolder(itemView) {
         var imageView: ImageView = itemView!!.findViewById(R.id.image_view)
 
     }

@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         }
 
         includedLayout.cardHowToVideos.setOnClickListener {
-            Toast.makeText(view.context, "How To Videos called", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_nav_home_to_howToVideosFragment)
         }
 
 

@@ -4,117 +4,129 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    tools:context=".ui.home.how_to_videos.HowToVideosFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_start_now"
+        android:id="@+id/card_street_outreach"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="#FFFF"
         app:cardCornerRadius="8dp"
-        app:cardMaxElevation="5dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
+        app:cardMaxElevation="8dp"
+        app:contentPaddingBottom="8dp"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingTop="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/start_now"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/howtohelp_start_now"
+            android:layout_gravity="start"
+            android:text="@string/intro_to_street_outreach"
             android:textColor="@color/black"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="fill_horizontal"
+            android:paddingTop="4dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_what_to_give"
+        android:id="@+id/card_homeless_veterans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="#FFFF"
         app:cardCornerRadius="8dp"
-        app:cardMaxElevation="5dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
+        app:cardMaxElevation="8dp"
+        app:contentPaddingBottom="8dp"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingTop="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:src="@drawable/soap"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/howtohelp_what_to_bring"
-            android:textAlignment="center"
+            android:layout_gravity="start"
+            android:text="@string/homeless_veterans"
             android:textColor="@color/black"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="fill_horizontal"
+            android:paddingTop="4dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             tools:ignore="ContentDescription" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_how_to_videos"
+        android:id="@+id/card_street_safety"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
+        android:layout_margin="4dp"
         app:cardBackgroundColor="#FFFF"
         app:cardCornerRadius="8dp"
-        app:cardMaxElevation="5dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
+        app:cardMaxElevation="8dp"
+        app:contentPaddingBottom="8dp"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingTop="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/how_to_videos"
-            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/hottohelp_how_to_videos"
+            android:layout_gravity="start"
+            android:text="@string/street_safety"
             android:textColor="@color/black"
-            android:textSize="26sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="8dp"
-            android:foregroundGravity="fill_horizontal"
+            android:paddingTop="4dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            tools:ignore="ContentDescription" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_mental_illness"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:cardBackgroundColor="#FFFF"
+        app:cardCornerRadius="8dp"
+        app:cardMaxElevation="8dp"
+        app:contentPaddingBottom="8dp"
+        app:contentPaddingLeft="8dp"
+        app:contentPaddingTop="8dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/mental_illness"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="4dp"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             tools:ignore="ContentDescription" />
 
