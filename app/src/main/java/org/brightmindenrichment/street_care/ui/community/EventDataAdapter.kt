@@ -8,9 +8,44 @@ import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 import java.util.*
 
+
+/**
+ // example addEvent
+//eventDataAdapter.addEvent("Food for Androids", "Feed all the android of the world.", Date()) {
+//    Log.d("BME", "Event added")
+//}
+
+//example setLiked
+//eventDataAdapter.setLikedEvent("2r9Z5TKnQYFC96iMAB1i", true) {
+//    Log.d("BME", "done")
+//}
+
+// example refresh
+//eventDataAdapter.refresh {
+//    for (event in this.eventDataAdapter.events) {
+//        Log.d("BME", "${event.title} ${event.date} ${event.liked}")
+//    }
+//}
+ * */
+
+
 class EventDataAdapter {
 
     var events: MutableList<Event> = mutableListOf()
+
+    val size: Int get() { return events.size }
+
+
+
+    fun getEventAtPosition(position: Int): Event? {
+
+        if ((position >=0) && (position < events.size)) {
+            return events[position]
+        }
+
+        return null
+    }
+
 
 
     fun addEvent(title: String, description: String, date: Date, onComplete: () -> Unit) {

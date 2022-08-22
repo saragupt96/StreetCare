@@ -6,9 +6,13 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toolbar
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineExceptionHandler
 import org.brightmindenrichment.street_care.R
 import java.util.*
 
@@ -54,31 +58,29 @@ class CommunityFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         if (Firebase.auth.currentUser != null) {
-
-            // example addEvent
-            //eventDataAdapter.addEvent("Food for Androids", "Feed all the android of the world.", Date()) {
-            //    Log.d("BME", "Event added")
-            //}
-
-            //example setLiked
-            //eventDataAdapter.setLikedEvent("2r9Z5TKnQYFC96iMAB1i", true) {
-            //    Log.d("BME", "done")
-            //}
-
-            // example refresh
-            eventDataAdapter.refresh {
-                for (event in this.eventDataAdapter.events) {
-                    Log.d("BME", "${event.title} ${event.date} ${event.liked}")
-                }
-            }
+            updateUI()
         }
         else {
+            // TODO : some message to user
             Log.d("BME", "not logged in")
         }
 
     }
+
+
+
+    private fun updateUI() {
+
+        eventDataAdapter.refresh {
+
+            val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerCommunity)
+
+            recyclerView?.layoutManager = LinearLayoutManager(view?.context)
+            recyclerView?.adapter = CommunityRecyclerAdapter(eventDataAdapter)
+        }
+    }
+
 
 
     override fun onResume() {
@@ -119,4 +121,19 @@ class CommunityFragment : Fragment() {
 
 
 
+    private fun createErrorHandler() : CoroutineExceptionHandler? {
+
+        val act = activity
+        if (act != null) {
+            return CoroutineExceptionHandler { _, exception ->
+                AlertDialog.Builder(act).setTitle("Error...")
+                    .setMessage(exception.message)
+                    .setPositiveButton(android.R.string.ok) { _, _ -> }
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
+            }
+        }
+
+        return null
+    }
 } // end class

@@ -2,6 +2,7 @@ package org.brightmindenrichment.street_care.ui.visit
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,19 +15,19 @@ class VisitFragment : Fragment() {
         fun newInstance() = VisitFragment()
     }
 
-    private lateinit var viewModel: VisitViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_visit, container, false)
     }
 
+
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(VisitViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
