@@ -1,5 +1,7 @@
 package org.brightmindenrichment.street_care.ui.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +15,11 @@ import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.CardHomeFragmentBinding
 import org.brightmindenrichment.street_care.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
+    private val url: String = "https://streetcare.us/doubleyourdonation/"
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -56,9 +60,13 @@ class HomeFragment : Fragment() {
         includedLayout.cardHowToVideos.setOnClickListener {
             findNavController().navigate(R.id.action_nav_home_to_howToVideosFragment)
         }
+        includedLayout.cardDonate.setOnClickListener {
+            goToUrl(url)
+        }
 
 
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -72,6 +80,12 @@ class HomeFragment : Fragment() {
         sliderView.isAutoCycle = true
         sliderView.scrollTimeInSec = 2
         sliderView.startAutoCycle()
+    }
+
+    private fun goToUrl(url: String) {
+        val uri: Uri = Uri.parse(url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 
 }

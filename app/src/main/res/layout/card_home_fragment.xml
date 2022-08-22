@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_between_text_and_icon_homepage"
             android:text="@string/howtohelp_start_now"
             android:textColor="@color/black"
             android:textSize="26sp" />
@@ -104,8 +104,45 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_between_text_and_icon_homepage"
             android:text="@string/hottohelp_how_to_videos"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="8dp"
+            android:foregroundGravity="fill_horizontal"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            tools:ignore="ContentDescription" />
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_donate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        app:cardBackgroundColor="#FFFF"
+        app:cardCornerRadius="8dp"
+        app:cardMaxElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="8dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/donate_icon"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_between_text_and_icon_homepage"
+            android:text="@string/donate"
             android:textColor="@color/black"
             android:textSize="26sp" />
 
