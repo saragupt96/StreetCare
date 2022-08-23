@@ -1,9 +1,11 @@
 package org.brightmindenrichment.street_care.ui.visit
 
+import android.util.Log
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.ui.community.Event
+import java.util.*
 
 class VisitDataAdapter {
 
@@ -43,9 +45,12 @@ class VisitDataAdapter {
         // make sure somebody is logged in
         val user = Firebase.auth.currentUser ?: return
 
+        Log.d("BME", user.uid)
+
         val db = Firebase.firestore
 
-        db.collection("surveys").get().addOnSuccessListener { result ->
+
+        db.collection("surveys").whereEqualTo("uid", user.uid).get().addOnSuccessListener { result ->
 
             // we are going to reload the whole list, remove anything already cached
             this.visits.clear()
@@ -73,6 +78,41 @@ class VisitDataAdapter {
 
             onComplete()
 
+        }
+    }
+
+    /**
+     * Example:
+        val user = Firebase.auth.currentUser
+
+        adapter.addVisit("Otterbein", 2, "Yes", 3, "It was fun.", "Can't wait to do it again", Date()) {
+            Log.d("BME", "added")
+        }
+     * */
+    fun addVisit(location: String, hours: Long, visitAgain: String, peopleCount: Long, experience: String, comments: String, date: Date, onComplete: () -> Unit) {
+
+        // make sure somebody is logged in
+        val user = Firebase.auth.currentUser ?: return
+
+        // create a map of event data so we can add to firebase
+        val visitData = hashMapOf(
+            "location" to location,
+            "hoursSpentOnOutreach" to hours,
+            "willPerformOutreachAgain" to visitAgain,
+            "helpers" to peopleCount,
+            "rating" to experience,
+            "comments" to comments,
+            "uid" to user.uid
+        )
+
+        // save to firebase
+        val db = Firebase.firestore
+        db.collection("surveys").add(visitData).addOnSuccessListener { documentReference ->
+            Log.d("BME", "Saved with id ${documentReference.id}")
+            onComplete()
+        } .addOnFailureListener { exception ->
+            Log.w("BMR", "Error in addEvent ${exception.toString()}")
+            onComplete()
         }
     }
 } // end class
