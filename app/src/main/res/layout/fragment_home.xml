@@ -45,7 +45,7 @@
             android:layout_margin="4dp"
             android:paddingLeft="10dp"
             android:text="@string/howtohelp_toolkit_to_help"
-            android:textColor="@color/light_gray"
+            android:textColor="@color/gray400"
             android:textSize="@dimen/home_screen_toolkit_to_help" />
 
         <include
