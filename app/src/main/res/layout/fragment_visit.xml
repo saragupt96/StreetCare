@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.visit.VisitFragment">
-
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="vertical"
+    android:gravity="center">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Visit me" />
+        android:layout_height="wrap_content"
+        android:text="@string/recent_visit_log"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:textAlignment="center"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/visit_log_hail_24"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp" />
+    <TextView
+        android:id="@+id/visit_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/no_log_message"
+        android:layout_margin="8dp"
+        android:textSize="@dimen/text_size16"
+        style="@style/TextAppearance.AppCompat.Body2"/>
+    <Button
+        android:id="@+id/submit_visit_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/black"
+        android:layout_marginBottom="64dp"
+        android:textStyle="bold"/>
 
-</FrameLayout>
+</LinearLayout>
+</ScrollView>

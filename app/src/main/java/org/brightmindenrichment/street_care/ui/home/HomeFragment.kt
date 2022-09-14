@@ -19,7 +19,7 @@ import org.brightmindenrichment.street_care.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val url: String = "https://streetcare.us/doubleyourdonation/"
+    private val url: String = "https://streetcare.us/site/donations"
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -48,6 +48,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpSliderImagesView()
+
 
         includedLayout.cardStartNow.setOnClickListener {
             findNavController().navigate(R.id.action_nav_home_to_startNowFragment)

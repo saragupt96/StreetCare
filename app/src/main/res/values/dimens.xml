@@ -12,4 +12,8 @@
     <dimen name="how_to_help">32sp</dimen>
     <dimen name="home_screen_toolkit_to_help">24sp</dimen>
     <dimen name="margin_between_text_and_icon_homepage">64dp</dimen>
+    <dimen name="text_size24">24sp</dimen>
+    <dimen name="text_size16">16sp</dimen>
+    <dimen name="text_size20">20sp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
 </resources>

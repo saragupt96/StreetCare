@@ -29,7 +29,7 @@
     <string name="homeless_veterans">Homeless Veterans</string>
     <string name="street_safety">Street Safety</string>
     <string name="mental_illness">Homelessness and Mental Illness</string>
-    
+
     <string name="menu_home">How to Help</string>
     <string name="menu_visit">Visit</string>
     <string name="menu_community">Community</string>
@@ -68,6 +68,34 @@
     <string name="picture_of_people_helping">Picture of people helping.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Visit screens messages-->
+    <string name="recent_visit_log">Recent Visit Log</string>
+    <string name="submit_button">Submit a Visit Log</string>
+    <string name="where_was_your_visit">Where was your visit?</string>
+    <string name="enter_location">Enter Location</string>
+    <string name="when_was_visit">When was your visit?</string>
+    <string name="no_log_message">You have not filled out any visit logs.Therefore none are available for display</string>
+    <string name="page_1_visit_content">Please fill out this (optional) form each time you go out. This help us build Street Care to bring more services to you and the community!</string>
+    <string name="outreach_quiz1">Hours spent on outreach?</string>
+    <string name="outreach_quiz2">Can you perform outreach again?</string>
+    <string name="outreach_quiz3">How many people joined you to help?</string>
+    <string name="hours_spent">%s Hours</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="undecided">Undecided</string>
+    <string name="minus"> - </string>
+    <string name="default_value"> 0 </string>
+    <string name="plus"> + </string>
+    <string name="next_button">Next</string>
+    <string name="page1_of_4">1 of 4</string>
+    <string name="page2_of_4">2 of 4</string>
+    <string name="page3_of_4">3 of 4</string>
+    <string name="page4_of_4">4 of 4</string>
+    <string name="outreach_experience">Rate your outreach experience</string>
+    <string name="question_or_comment">Questions or comments?</string>
+    <string name="button_submit_visit_log">Submit visit log</string>
+    <string name="hint_feedback">"Please give your feedback here"</string>
 
 
 </resources>
