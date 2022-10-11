@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_home_to_howToVideosFragment"
             app:destination="@id/howToVideosFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_whatToGiveFragment"
+            app:destination="@id/whatToGiveFragment" />
     </fragment>
 
     <fragment
@@ -58,7 +61,21 @@
         android:id="@+id/visitFormFragment4"
         android:name="org.brightmindenrichment.street_care.ui.visit.visit_forms.VisitFormFragment4"
         android:label="Log Your Visit"
-        tools:layout="@layout/fragment_visit_form4" />
+        tools:layout="@layout/fragment_visit_form4" >
+        <action
+            android:id="@+id/action_visitFormFragment4_to_surveySubmittedFragment"
+            app:destination="@id/surveySubmittedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/surveySubmittedFragment"
+        android:name="org.brightmindenrichment.street_care.ui.visit.visit_forms.SurveySubmittedFragment"
+        android:label="Log Your Visit">
+        <action
+            android:id="@+id/action_surveySubmittedFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 
     <fragment
@@ -110,5 +127,11 @@
         android:name="org.brightmindenrichment.street_care.ui.home.how_to_videos.HowToVideosFragment"
         android:label="How to Help"
         tools:layout="@layout/fragment_how_to_videos" />
+    <fragment
+        android:id="@+id/whatToGiveFragment"
+        android:name="org.brightmindenrichment.street_care.ui.home.what_to_give.WhatToGiveFragment"
+        android:label="What to Give"
+        tools:layout="@layout/fragment_what_to_give" />
+
 
 </navigation>

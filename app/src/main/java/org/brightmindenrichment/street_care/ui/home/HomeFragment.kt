@@ -55,7 +55,8 @@ class HomeFragment : Fragment() {
         }
 
         includedLayout.cardWhatToGive.setOnClickListener {
-            Toast.makeText(view.context, "What to Give called", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_nav_home_to_whatToGiveFragment)
+
         }
 
         includedLayout.cardHowToVideos.setOnClickListener {

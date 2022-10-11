@@ -24,6 +24,15 @@
     <string name="on_the_street">On The Street</string>
     <string name="after">After</string>
 
+    <!-- Home/what to give screen-->
+    <string name="featured_items">Featured Items</string>
+    <string name="healthy_snacks">Healthy Snacks</string>
+    <string name="water">Water</string>
+    <string name="first_aid">First Aid</string>
+    <string name="personal_hygiene">Personal Hygiene</string>
+    <string name="sock_clothing">Socks and Clothing</string>
+    <string name="feminine_hygiene">Feminine Hygiene</string>
+
     <!-- Home/How to video screen-->
     <string name="intro_to_street_outreach">An Introduction to Street Outreach</string>
     <string name="homeless_veterans">Homeless Veterans</string>
@@ -66,8 +75,7 @@
     <string name="error_missing_required_data">Missing required information.</string>
     <string name="error_failed_to_create_user">Failed to create account.  Try again later.</string>
     <string name="picture_of_people_helping">Picture of people helping.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <!-- Visit screens messages-->
     <string name="recent_visit_log">Recent Visit Log</string>
@@ -80,7 +88,7 @@
     <string name="outreach_quiz1">Hours spent on outreach?</string>
     <string name="outreach_quiz2">Can you perform outreach again?</string>
     <string name="outreach_quiz3">How many people joined you to help?</string>
-    <string name="hours_spent">%s Hours</string>
+    <string name="hours_spent">%d Hours </string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="undecided">Undecided</string>
@@ -93,9 +101,17 @@
     <string name="page3_of_4">3 of 4</string>
     <string name="page4_of_4">4 of 4</string>
     <string name="outreach_experience">Rate your outreach experience</string>
+    <string name="satisfied">Satisfied</string>
+    <string name="neutral">Neutral</string>
+    <string name="dissatisfied">Dissatisfied</string>
     <string name="question_or_comment">Questions or comments?</string>
     <string name="button_submit_visit_log">Submit visit log</string>
     <string name="hint_feedback">"Please give your feedback here"</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="thank_u_message">for taking the time to fill out the survey</string>
+    <string name="return_home">Return Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
 
 
 </resources>

@@ -7,16 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitBinding
+import org.brightmindenrichment.street_care.ui.visit.visit_forms.VisitViewModel
 import java.util.*
 
 class VisitFragment : Fragment() {
     private var _binding : FragmentVisitBinding? = null
     val binding get() = _binding!!
+    private val sharedVisitViewModel : VisitViewModel by activityViewModels()
 
     companion object {
         fun newInstance() = VisitFragment()
@@ -39,6 +42,8 @@ class VisitFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.submitVisitLog.setOnClickListener{
+            // if user is submitting multiple visit log together, the view model field should reset
+            sharedVisitViewModel.resetVisitLogPage()
             findNavController().navigate(R.id.action_nav_visit_to_visitFormFragment1)
         }
     }

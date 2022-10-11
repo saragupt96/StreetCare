@@ -27,7 +27,7 @@
         android:textStyle="bold"
         android:text="@string/question_or_comment"/>
     <EditText
-        android:id="@+id/edit_text_comments"
+        android:id="@+id/comments_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8dp"
@@ -37,8 +37,7 @@
         android:gravity="start"
         android:singleLine="false"
         android:hint="@string/hint_feedback"
-        android:background="@drawable/edit_text_rounded_corner"
-        />
+        android:background="@drawable/edit_text_rounded_corner" />
 
     <Button
         android:id="@+id/submit_log"
