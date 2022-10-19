@@ -9,10 +9,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size24"
         android:text="@string/page3_of_4"
         android:textStyle="bold"
-        android:layout_margin="8dp"/>
+        android:layout_margin="@dimen/margin_8dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,32 +24,53 @@
             style="@style/TextAppearance.AppCompat.Headline"
             android:text="@string/outreach_experience"
             android:textStyle="bold"
+            android:textSize="@dimen/text_size24"
             android:layout_gravity="center_horizontal"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <ImageButton
-            android:id="@+id/btn_satisfied"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_sentiment_very_satisfied_24"
-            android:layout_weight="1"
-            android:padding="24dp"/>
-        <ImageButton
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp">
+
+            <Button
+                android:id="@+id/btn_satisfied"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_8dp"
+                android:drawableTop="@drawable/ic_baseline_sentiment_very_satisfied_24"
+                android:text="@string/satisfied"
+                android:drawablePadding="@dimen/padding_8dp"
+                android:backgroundTint="@color/gray400"
+                android:textAllCaps="false"
+                android:textStyle="bold" />
+        <Button
             android:id="@+id/btn_neutral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="24dp"
-            android:src="@drawable/ic_baseline_sentiment_neutral_24"/>
-        <ImageButton
+            android:padding="@dimen/padding_8dp"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:drawableTop="@drawable/ic_baseline_sentiment_neutral_24"
+            android:text="@string/neutral"
+            android:drawablePadding="@dimen/padding_8dp"
+            android:backgroundTint="@color/gray400"
+            android:textAllCaps="false"
+            android:textStyle="bold"/>
+        <Button
             android:id="@+id/btn_dissatisfied"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="24dp"
-            android:src="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
+            android:padding="@dimen/padding_8dp"
+            android:layout_marginStart="@dimen/margin_8dp"
+            android:drawableTop="@drawable/ic_baseline_sentiment_very_dissatisfied_24"
+            android:text="@string/dissatisfied"
+            android:drawablePadding="@dimen/padding_8dp"
+            android:backgroundTint="@color/gray400"
+            android:textAllCaps="false"
+           android:textStyle="bold"/>
         </LinearLayout>
 
         <Button
@@ -57,9 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginTop="@dimen/margin_24dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:layout_marginBottom="@dimen/margin_bottom_72dp"
+            android:textSize="@dimen/text_size20"
             android:text="@string/next_button" />
 
 

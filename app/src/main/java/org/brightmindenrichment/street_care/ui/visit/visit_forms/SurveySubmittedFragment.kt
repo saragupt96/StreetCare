@@ -27,6 +27,9 @@ class SurveySubmittedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.btnAnotherVisit.setOnClickListener{
+            findNavController().navigate(R.id.action_surveySubmittedFragment_to_visitFormFragment1)
+        }
         binding.btnReturnHome.setOnClickListener{
 
             findNavController().navigate(R.id.action_surveySubmittedFragment_to_nav_home)

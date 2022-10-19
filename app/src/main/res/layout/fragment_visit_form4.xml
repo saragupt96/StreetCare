@@ -15,28 +15,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size24"
         android:text="@string/page4_of_4"
         android:textStyle="bold"
-        android:layout_margin="8dp"/>
+        android:layout_margin="@dimen/margin_8dp"/>
     <TextView
         style="@style/TextAppearance.AppCompat.Headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textStyle="bold"
+        android:layout_marginTop="@dimen/margin_24dp"
+        android:textSize="@dimen/text_size24"
         android:text="@string/question_or_comment"/>
     <EditText
         android:id="@+id/comments_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_16dp"
         android:padding="@dimen/margin_8dp"
         android:layout_marginHorizontal="@dimen/margin_8dp"
         android:inputType="text|textMultiLine|textCapSentences"
         android:gravity="start"
         android:singleLine="false"
         android:hint="@string/hint_feedback"
+        android:textCursorDrawable="@color/gray300"
+        android:textSize="@dimen/text_size24"
         android:background="@drawable/edit_text_rounded_corner" />
 
     <Button
@@ -48,6 +52,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="72dp"
         android:textAllCaps="false"
-        android:text="@string/button_submit_visit_log"/>
+        android:text="@string/button_submit_visit_log"
+        android:textSize="@dimen/text_size20"/>
 </LinearLayout>
 </ScrollView>

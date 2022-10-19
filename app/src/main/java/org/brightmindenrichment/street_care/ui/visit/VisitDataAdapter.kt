@@ -59,9 +59,9 @@ class VisitDataAdapter {
                 var visit = VisitLog()
 
                 visit.location = document.get("location").toString()
-                visit.hours = document.get("hoursSpentOnOutreach") as Long?
+                visit.hours = document.get("hoursSpentOnOutreach") as Long
                 visit.visitAgain = document.get("willPerformOutreachAgain").toString()
-                visit.peopleCount = document.get("helpers") as Long?
+                visit.peopleCount = document.get("helpers") as Long
                 visit.experience = document.get("rating").toString()
                 visit.comments = document.get("comments").toString()
 

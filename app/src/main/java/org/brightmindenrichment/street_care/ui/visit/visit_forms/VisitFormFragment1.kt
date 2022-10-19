@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm1Binding
 import org.brightmindenrichment.street_care.util.Extensions
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -25,7 +27,6 @@ class VisitFormFragment1 : Fragment() {
     private val binding get() = _binding!!
     private val myCalendar: Calendar = Calendar.getInstance()
     private val sharedVisitViewModel: VisitViewModel by activityViewModels()
-    //private lateinit var location: String
     private var displayDateFormat: String = "MM/dd/yyyy"
 
 
@@ -42,26 +43,24 @@ class VisitFormFragment1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewStateRestored(savedInstanceState)
-            //sharedVisitViewModel.resetVisitLogPage1()
-
-        // When this page loads, current date is displayed in the date field By default
-        displayDate(Extensions.dateToString(sharedVisitViewModel.date.value, displayDateFormat ))
 
 
-        binding.tvSetDate.setOnClickListener {
-            populateCalendarToSelectVisitDate()
+        binding.datePickerActions.setOnClickListener{
+          myCalendar.time =  populateCalendarToSelectVisitDate()
         }
 
         binding.btnGoToPage2.setOnClickListener {
-            if(!sharedVisitViewModel.validateLocation(binding.location.text.toString())){
-                Extensions.showDialog(requireContext(),"Please fill your location ", "Ok")
-            }else if(!sharedVisitViewModel.validateDate(getUserVisitDate())){
-                Extensions.showDialog(requireContext(),"Please fill your past visit date", "Ok")
-            }else{
-               val  location  = getUserLocation()
-                val visitedDate = getUserVisitDate()
-                sharedVisitViewModel.setLocation(location)
-                sharedVisitViewModel.setDate(visitedDate)
+
+            if (!sharedVisitViewModel.validateLocation(binding.location.text.toString())) {
+                Extensions.showDialog(requireContext(), "Please fill your location ", "Ok")
+            } else if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
+                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
+            } else {
+               val location = binding.location.text.toString()
+
+                sharedVisitViewModel.visitLog.location = location
+
+
                 findNavController().navigate(R.id.action_visitFormFragment1_to_visitFormFragment2)
             }
 
@@ -69,10 +68,6 @@ class VisitFormFragment1 : Fragment() {
 
     }
 
-
-    private fun getUserLocation(): String {
-        return binding.location.text.toString()
-    }
 
 
 
@@ -82,9 +77,10 @@ class VisitFormFragment1 : Fragment() {
                 myCalendar.set(Calendar.YEAR, year)
                 myCalendar.set(Calendar.MONTH, month)
                 myCalendar.set(Calendar.DAY_OF_MONTH, day)
-                //handleVisitedDate()
-                sharedVisitViewModel.setDate(myCalendar.time)
-                displayDate(Extensions.dateToString(sharedVisitViewModel.date.value, displayDateFormat ))
+                displayDate(Extensions.dateToString(myCalendar.time, displayDateFormat))
+                //setting the user selected date into object
+                sharedVisitViewModel.visitLog.date = myCalendar.time
+
             }
 
         context?.let { it1 ->
@@ -95,39 +91,17 @@ class VisitFormFragment1 : Fragment() {
                 myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)
 
+
             ).show()
+
         }
-       return myCalendar.time
-
-    }
-
-    private fun getUserVisitDate() :Date{
-
         return myCalendar.time
-////        val myFormat = "MM/dd/yyyy"
-////        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-////        println("${dateFormat}-------------1---------")
-////        val myFormattedCurrentDate: String = dateFormat.format(myCalendar.time)
-////        println("${myCalendar.time}-------------2---------")
-//        println("handleVisitedDate called-----------------")
-//        println("dateToString-------${Extensions.dateToString(myCalendar.time, displayDateFormat)}-------------3---------")
-//        sharedViewModel.setDate(myCalendar.time)
-//        displayDate(Extensions.dateToString(sharedViewModel.date.value, displayDateFormat ))
-////        val date = dateFormat.parse(myFormattedCurrentDate)
-////            displayDate(Extensions.dateToString(sharedViewModel.date.value, myFormat))
-////        //sharedViewModel.setDate(date)
-////        println("visit date = ----------------${sharedViewModel.date.value}")
-////        println("myFormattedDate = $myFormattedCurrentDate")
+
     }
-//    private fun getCurrentDate(): Date {
-//        val myFormat = "MM/dd/yyyy"
-//        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-//        val date : String = dateFormat.format(myCalendar.time)
-//        println("current date= $date")
-//        return dateFormat.parse(date)
-//    }
-    private fun displayDate(dateString : String){
-        binding.tvSetDate.text = dateString
+
+
+    private fun displayDate(dateString: String) {
+        binding.datePickerActions.setText(dateString)
     }
 
     override fun onDestroy() {

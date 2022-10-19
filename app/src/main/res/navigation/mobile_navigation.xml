@@ -75,6 +75,10 @@
             app:destination="@id/nav_home"
             app:popUpTo="@id/nav_home"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_surveySubmittedFragment_to_visitFormFragment1"
+            app:popUpTo="@id/visitFormFragment1"
+            app:destination="@id/visitFormFragment1" />
     </fragment>
 
 

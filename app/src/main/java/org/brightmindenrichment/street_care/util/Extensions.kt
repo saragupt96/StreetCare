@@ -10,8 +10,6 @@ import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.Window
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import java.util.*
 

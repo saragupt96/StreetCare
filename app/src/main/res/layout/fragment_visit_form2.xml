@@ -18,12 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:textAlignment="textEnd"
-            android:layout_margin="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
+            android:textAlignment="center"
+            android:layout_margin="@dimen/margin_8dp"
             android:text="@string/page2_of_4"
-            android:textSize="24sp"
+            android:textSize="@dimen/text_size24"
             android:textStyle="bold" />
 
         <TextView
@@ -34,10 +32,10 @@
             android:layout_below="@+id/page_no"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
             android:text="@string/outreach_quiz1"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size20"
+            android:textSize="@dimen/text_size24"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -45,8 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_quiz1"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginBottom="@dimen/margin_16dp"
             android:orientation="horizontal"
             android:weightSum="4">
 
@@ -68,9 +66,11 @@
                 android:layout_weight="1"
                 android:maxLines="1"
                 android:padding="8dp"
-                android:text="@string/hours_spent"
+                android:text="0 Hours"
                 android:textSize="@dimen/text_size18"
                 android:textStyle="bold"/>
+               <!-- android:text="@string/hours_spent"-->
+
         </LinearLayout>
 
         <TextView
@@ -83,7 +83,7 @@
             android:layout_alignParentEnd="true"
             android:text="@string/outreach_quiz2"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size20"
+            android:textSize="@dimen/text_size24"
             android:textStyle="bold" />
         <RadioGroup
             android:id="@+id/linearLayout_outreach_button"
@@ -91,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_quiz2"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:layout_marginBottom="@dimen/margin_16dp"
             android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/btn_yes"
@@ -103,28 +103,25 @@
                 android:text="@string/yes"
                 android:checked="true"
                 android:textSize="@dimen/text_size20"
-                android:buttonTint="@color/accent1"
-                android:textColor="@color/black"/>
+                android:buttonTint="@color/accent1"/>
             <RadioButton
                 android:id="@+id/btn_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_8dp"
                 android:layout_weight="1"
                 android:text="@string/no"
                 android:textSize="@dimen/text_size20"
-                android:buttonTint="@color/accent1"
-                android:textColor="@color/black"/>
+                android:buttonTint="@color/accent1" />
             <RadioButton
                 android:id="@+id/btn_undecided"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/margin_8dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size20"
                 android:text="@string/undecided"
-                android:buttonTint="@color/accent1"
-                android:textColor="@color/black"/>
+                android:buttonTint="@color/accent1" />
 
         </RadioGroup>
 
@@ -182,11 +179,11 @@
             android:layout_below="@+id/linearLayout_outreach_button"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
             android:maxLines="1"
             android:text="@string/outreach_quiz3"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size20"
+            android:textSize="@dimen/text_size24"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -194,22 +191,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_quiz3"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="@dimen/padding_8dp">
 
             <Button
                 android:id="@+id/decrease_no_of_people"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle_button"
-                android:padding="12dp"
+                android:padding="@dimen/padding_12dp"
                 android:text="@string/minus"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/gray800"
                 android:textSize="@dimen/text_size24" />
 
             <TextView
@@ -219,7 +215,6 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_weight="1"
                 android:padding="12dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/oval_text_view"
                 android:text="@string/default_value"
                 android:textAlignment="center"
@@ -229,13 +224,12 @@
                 android:id="@+id/increase_no_of_people"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:background="@drawable/circle_button"
-                android:padding="12dp"
+                android:padding="@dimen/padding_12dp"
                 android:text="@string/plus"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/gray800"
                 android:textSize="@dimen/text_size24" />
 
         </LinearLayout>
@@ -246,9 +240,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/linearLayout2"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="72dp"
+            android:layout_marginTop="@dimen/margin_24dp"
+            android:layout_marginEnd="@dimen/margin_8dp"
+            android:layout_marginBottom="@dimen/margin_bottom_72dp"
+            android:textSize="@dimen/text_size20"
             android:text="@string/next_button" />
     </RelativeLayout>
 </ScrollView>

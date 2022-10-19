@@ -8,8 +8,8 @@ import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 
 class VisitLogRepositoryImp : VisitLogRepository {
 
-    override fun addVisitLog(visitLog: VisitLog) {
 
+    override fun saveVisitLog(visitLog: VisitLog) {
         // make sure somebody is logged in
         val user = Firebase.auth.currentUser ?: return
 

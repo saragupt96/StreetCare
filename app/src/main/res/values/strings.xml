@@ -80,8 +80,9 @@
     <!-- Visit screens messages-->
     <string name="recent_visit_log">Recent Visit Log</string>
     <string name="submit_button">Submit a Visit Log</string>
-    <string name="where_was_your_visit">Where was your visit?</string>
-    <string name="enter_location">Enter Location</string>
+    <string name="where_was_your_visit">* Where was your visit?</string>
+    <string name="enter_location">Enter Your Location</string>
+    <string name="enter_date">Select your Visited Date</string>
     <string name="when_was_visit">When was your visit?</string>
     <string name="no_log_message">You have not filled out any visit logs.Therefore none are available for display</string>
     <string name="page_1_visit_content">Please fill out this (optional) form each time you go out. This help us build Street Care to bring more services to you and the community!</string>
@@ -110,6 +111,7 @@
     <string name="thank_you">Thank You!</string>
     <string name="thank_u_message">for taking the time to fill out the survey</string>
     <string name="return_home">Return Home</string>
+    <string name="another_visit"> Add Another visit</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 
