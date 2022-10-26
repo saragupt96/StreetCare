@@ -80,7 +80,7 @@
     <!-- Visit screens messages-->
     <string name="recent_visit_log">Recent Visit Log</string>
     <string name="submit_button">Submit a Visit Log</string>
-    <string name="where_was_your_visit">* Where was your visit?</string>
+    <string name="where_was_your_visit">Where was your visit?</string>
     <string name="enter_location">Enter Your Location</string>
     <string name="enter_date">Select your Visited Date</string>
     <string name="when_was_visit">When was your visit?</string>
@@ -96,10 +96,11 @@
     <string name="minus"> - </string>
     <string name="default_value"> 0 </string>
     <string name="plus"> + </string>
-    <string name="next_button">Next</string>
-    <string name="page1_of_4">1 of 4</string>
-    <string name="page2_of_4">2 of 4</string>
-    <string name="page3_of_4">3 of 4</string>
+    <string name="submit_here_button">Submit Here</string>
+    <string name="next_button">Go To Next Page</string>
+    <string name="page1_of_4">1 of 3</string>
+    <string name="page2_of_4">2 of 3</string>
+    <string name="page3_of_4">3 of 3</string>
     <string name="page4_of_4">4 of 4</string>
     <string name="outreach_experience">Rate your outreach experience</string>
     <string name="satisfied">Satisfied</string>

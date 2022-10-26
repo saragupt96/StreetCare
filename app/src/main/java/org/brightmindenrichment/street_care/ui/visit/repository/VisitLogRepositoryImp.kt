@@ -23,6 +23,7 @@ class VisitLogRepositoryImp : VisitLogRepository {
             "willPerformOutreachAgain" to visitLog.visitAgain,
             "helpers" to visitLog.peopleCount,
             "rating" to visitLog.experience,
+            "date" to visitLog.date,
             "comments" to visitLog.comments,
             "uid" to user.uid
         )

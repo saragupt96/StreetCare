@@ -11,9 +11,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm1Binding
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 import org.brightmindenrichment.street_care.util.Extensions
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -48,27 +47,27 @@ class VisitFormFragment1 : Fragment() {
         binding.datePickerActions.setOnClickListener{
           myCalendar.time =  populateCalendarToSelectVisitDate()
         }
+        binding.btnSubmitHere.setOnClickListener {
+            if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
+                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
+            } else {
+                sharedVisitViewModel.saveVisitLog()
+                sharedVisitViewModel.visitLog = VisitLog()
+                findNavController().navigate(R.id.action_visitFormFragment1_to_nav_home)
+            }
+        }
 
         binding.btnGoToPage2.setOnClickListener {
 
-            if (!sharedVisitViewModel.validateLocation(binding.location.text.toString())) {
-                Extensions.showDialog(requireContext(), "Please fill your location ", "Ok")
-            } else if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
+                if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
                 Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
             } else {
-               val location = binding.location.text.toString()
-
-                sharedVisitViewModel.visitLog.location = location
-
-
                 findNavController().navigate(R.id.action_visitFormFragment1_to_visitFormFragment2)
             }
 
         }
 
     }
-
-
 
 
     private fun populateCalendarToSelectVisitDate() : Date{
