@@ -36,15 +36,8 @@ class Extensions {
             alert.setTitle("Alert!")
             alert.show()
         }
-
-
     }
-
-
-
-
-
-    fun Context.createDialog(layout: Int, cancelable: Boolean, message : String): Dialog {
+fun Context.createDialog(layout: Int, cancelable: Boolean, message : String): Dialog {
         val dialog = Dialog(this, R.style.Theme_Dialog)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(layout)

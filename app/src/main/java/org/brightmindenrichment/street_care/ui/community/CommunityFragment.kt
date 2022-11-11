@@ -1,5 +1,6 @@
 package org.brightmindenrichment.street_care.ui.community
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -8,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.Toolbar
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -16,21 +18,8 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import org.brightmindenrichment.street_care.R
 import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//private const val ARG_PARAM1 = "param1"
-//private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CommunityFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CommunityFragment : Fragment() {
-//    // TODO: Rename and change types of parameters
-//    private var param1: String? = null
-//    private var param2: String? = null
+
 
     private lateinit var buttonAdd: ImageButton
 
@@ -40,8 +29,7 @@ class CommunityFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -59,7 +47,7 @@ class CommunityFragment : Fragment() {
 
 
         if (Firebase.auth.currentUser != null) {
-            updateUI()
+           updateUI()
         }
         else {
             // TODO : some message to user
@@ -92,15 +80,28 @@ class CommunityFragment : Fragment() {
             Log.d("BME", "Did not find toolbar")
         }
         else {
-            buttonAdd = ImageButton(this.context)
-            buttonAdd.setBackgroundResource(R.drawable.ic_menu_add)
-            val l3 = Toolbar.LayoutParams(
-                Toolbar.LayoutParams.WRAP_CONTENT,
-                Toolbar.LayoutParams.WRAP_CONTENT
-            )
-            l3.gravity = Gravity.RIGHT
-            buttonAdd.layoutParams = l3
-            toolbar.addView(buttonAdd)
+            if (Firebase.auth.currentUser != null)
+            {
+                buttonAdd = ImageButton(this.context)
+                buttonAdd.setBackgroundResource(R.drawable.ic_menu_add)
+                val l3 = Toolbar.LayoutParams(
+                    Toolbar.LayoutParams.WRAP_CONTENT,
+                    Toolbar.LayoutParams.WRAP_CONTENT
+                )
+                l3.gravity = Gravity.LEFT
+                buttonAdd.layoutParams = l3
+                toolbar.addView(buttonAdd)
+
+                buttonAdd.setOnClickListener {
+
+                      findNavController().navigate(R.id.nav_add_event)
+                    Log.d("BME", "Add")
+                    onDetach()
+            }
+
+
+            }
+
         }
     }
 
@@ -113,8 +114,9 @@ class CommunityFragment : Fragment() {
             Log.d("BME", "Did not find toolbar")
         }
         else {
-            if (buttonAdd != null) {
-                toolbar.removeView(buttonAdd)
+           if (buttonAdd != null) {
+               toolbar.removeView(buttonAdd)
+             // buttonAdd.visibility=View.GONE
             }
         }
     }

@@ -11,14 +11,16 @@ import org.brightmindenrichment.street_care.R
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 
-class CommunityRecyclerAdapter(private val controller: EventDataAdapter) : RecyclerView.Adapter<CommunityRecyclerAdapter.ViewHolder>() {
+class CommunityRecyclerAdapter(private val controller: EventDataAdapter) :
+    RecyclerView.Adapter<CommunityRecyclerAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val communityItemView: View) : RecyclerView.ViewHolder(communityItemView) {
 
         val textViewTitle: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityTitle)
-        val textViewSmallDate: TextView = communityItemView.findViewById<TextView>(R.id.textViewSmallDate)
-        val textViewFullDate: TextView = communityItemView.findViewById<TextView>(R.id.textViewFullDate)
+        val textViewSmallDate: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityDate)
         val textViewDescription: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityDescription)
+        val textViewCommunityLocation: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityLocation)
+        val textViewCommunityTime: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityTime)
 
         init {
 
@@ -49,14 +51,11 @@ class CommunityRecyclerAdapter(private val controller: EventDataAdapter) : Recyc
         if (event != null) {
             holder.textViewTitle.text = event.title.orEmpty()
             holder.textViewDescription.text = event.description.orEmpty()
+            holder.textViewCommunityLocation.text=event.location.orEmpty()
+            holder.textViewCommunityTime.text=event.time.orEmpty()
+            holder.textViewSmallDate.text = event.date.orEmpty()
 
-            if (event.date != null) {
-                holder.textViewSmallDate.text = SimpleDateFormat("MMM dd").format(event.date)
-                holder.textViewFullDate.text = SimpleDateFormat("DD, MMM HH:mm").format(event.date)
             }
-            else {
-                holder.textViewSmallDate.text = ""
-            }
+
         }
     }
-}

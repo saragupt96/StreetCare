@@ -86,12 +86,12 @@
         android:id="@+id/nav_community"
         android:name="org.brightmindenrichment.street_care.ui.community.CommunityFragment"
         android:label="Community"
-        tools:layout="@layout/fragment_visit" />
+        tools:layout="@layout/fragment_community" />
 
     <fragment
         android:id="@+id/nav_user"
         android:name="org.brightmindenrichment.street_care.ui.user.UserFragment"
-        android:label="User"
+        android:label="Profile"
         tools:layout="@layout/fragment_user" >
         <action
             android:id="@+id/action_nav_user_to_nav_login"
@@ -106,7 +106,11 @@
         android:name="org.brightmindenrichment.street_care.ui.user.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" />
-
+    <fragment
+        android:id="@+id/nav_add_event"
+        android:name="org.brightmindenrichment.street_care.ui.community.AddEvent"
+        android:label="Add Event"
+        tools:layout="@layout/fragment_add_event" />
     <fragment
         android:id="@+id/nav_sign_up"
         android:name="org.brightmindenrichment.street_care.ui.user.SignUpFragment"
@@ -137,5 +141,9 @@
         android:label="What to Give"
         tools:layout="@layout/fragment_what_to_give" />
 
-
+    <fragment
+        android:id="@+id/pendingEvents"
+        android:name="org.brightmindenrichment.street_care.ui.community.PendingEvents"
+        android:label="Pending Events"
+        tools:layout="@layout/fragment_pending_events" />
 </navigation>

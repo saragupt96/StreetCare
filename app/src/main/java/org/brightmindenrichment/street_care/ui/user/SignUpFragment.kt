@@ -93,16 +93,22 @@ class SignUpFragment : Fragment() {
                         val userData = hashMapOf<String, Any>(
                             "dateCreated" to Date(),
                             "deviceType" to "Android",
-                            "email" to editTextEmail.text.toString(),
+                            "email" to email ,
                             "isValid" to true,
-                            "organization" to editTextEmail.text.toString(),
-                            "username" to editTextUsername.text.toString(),
+                            "organization" to company,
+                            "username" to userName,
                             "uid" to (currentUser?.uid ?: "??")
                         )
 
                         val db = FirebaseFirestore.getInstance()
                         db.collection("users").add(userData).addOnCompleteListener { task ->
+                            Toast.makeText(activity, "Successfully Register", Toast.LENGTH_SHORT).show();
                             findNavController().navigateUp()
+                            editTextCompany.text.clear()
+                            editTextEmail.text.clear()
+                            editTextPassword.text.clear()
+                            editTextPassword2.text.clear()
+                            editTextUsername.text.clear()
                         }
                     }
                     else {
