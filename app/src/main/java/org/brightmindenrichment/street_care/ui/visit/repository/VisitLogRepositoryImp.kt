@@ -1,12 +1,18 @@
 package org.brightmindenrichment.street_care.ui.visit.repository
 
 import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firestore.v1.StructuredQuery
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 
 class VisitLogRepositoryImp : VisitLogRepository {
+    var visits: MutableList<VisitLog> = mutableListOf()
 
 
     override fun saveVisitLog(visitLog: VisitLog) {
@@ -40,5 +46,42 @@ class VisitLogRepositoryImp : VisitLogRepository {
         }
     }
 
+    override fun loadVisitLogs(onComplete: () -> Unit) {
+        // make sure somebody is logged in
+        val user = Firebase.auth.currentUser ?: return
+        //val user = Firebase.auth.currentUser
+
+
+        Log.d("BME", user.uid)
+        val db = Firebase.firestore
+        db.collection("surveys").whereEqualTo("uid", user.uid).get().addOnSuccessListener { result ->
+
+            // we are going to reload the whole list, remove anything already cached
+            this.visits.clear()
+
+            for (document in result) {
+                var visit = VisitLog()
+
+                visit.location = document.get("location").toString()
+                visit.hours = document.get("hoursSpentOnOutreach") as Long
+                visit.visitAgain = document.get("willPerformOutreachAgain").toString()
+                visit.peopleCount = document.get("helpers") as Long
+                visit.experience = document.get("rating").toString()
+                visit.comments = document.get("comments").toString()
+
+                if (document.get("date") != null) {
+                    val dt = document.get("date") as com.google.firebase.Timestamp
+                    if (dt != null) {
+                        visit.date = dt.toDate()
+                    }
+                }
+
+                this.visits.add(visit)
+            }
+
+            onComplete()
+
+        }
+    }
 
 }// end of class

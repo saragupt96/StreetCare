@@ -39,10 +39,11 @@
             android:id="@+id/action_visitFormFragment1_to_visitFormFragment2"
             app:destination="@id/visitFormFragment2" />
         <action
-            android:id="@+id/action_visitFormFragment1_to_nav_home"
-            app:destination="@id/nav_home"
-            app:popUpTo="@id/nav_home"
+            android:id="@+id/action_visitFormFragment1_to_nav_visit"
+            app:destination="@id/nav_visit"
+            app:popUpTo="@id/nav_visit"
             app:popUpToInclusive="true"/>
+
     </fragment>
     <fragment
         android:id="@+id/visitFormFragment2"
@@ -53,10 +54,11 @@
             android:id="@+id/action_visitFormFragment2_to_visitFormFragment3"
             app:destination="@id/visitFormFragment3" />
         <action
-            android:id="@+id/action_visitFormFragment2_to_nav_home"
-            app:destination="@id/nav_home"
-            app:popUpTo="@id/nav_home"
+            android:id="@+id/action_visitFormFragment2_to_nav_visit"
+            app:destination="@id/nav_visit"
+            app:popUpTo="@id/nav_visit"
             app:popUpToInclusive="true"/>
+
     </fragment>
     <fragment
         android:id="@+id/visitFormFragment3"
@@ -122,12 +124,27 @@
         <action
             android:id="@+id/action_nav_start_now_to_beforeFragment"
             app:destination="@id/nav_before" />
+
+        <action
+            android:id="@+id/action_nav_start_now_to_afterFragment"
+            app:destination="@id/afterFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_before"
         android:name="org.brightmindenrichment.street_care.ui.home.start_now.tabs.BeforeFragment"
         android:label="Back"
         tools:layout="@layout/fragment_before" />
+    <fragment
+        android:id="@+id/afterFragment"
+        android:name="org.brightmindenrichment.street_care.ui.home.start_now.tabs.AfterFragment"
+        android:label="fragment_after"
+        tools:layout="@layout/fragment_after" >
+
+
+        <action
+            android:id="@+id/action_afterFragment_to_visitFormFragment1"
+            app:destination="@id/visitFormFragment1" />
+    </fragment>
     <fragment
         android:id="@+id/howToVideosFragment"
         android:name="org.brightmindenrichment.street_care.ui.home.how_to_videos.HowToVideosFragment"
@@ -138,6 +155,7 @@
         android:name="org.brightmindenrichment.street_care.ui.home.what_to_give.WhatToGiveFragment"
         android:label="What to Give"
         tools:layout="@layout/fragment_what_to_give" />
+
 
 
 </navigation>
