@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm3Binding
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 
 
 class VisitFormFragment3 : Fragment() {
@@ -53,9 +54,16 @@ class VisitFormFragment3 : Fragment() {
         }
 
 
-        binding.btnGoToPage4.setOnClickListener{
-            findNavController().navigate(R.id.action_visitFormFragment3_to_visitFormFragment4)
+
+        binding.btnSubmitVisit.setOnClickListener{
+            sharedVisitViewModel.visitLog.comments = getUserComments()
+            sharedVisitViewModel.saveVisitLog()
+            sharedVisitViewModel.visitLog = VisitLog()
+            findNavController().navigate(R.id.action_visitFormFragment3_to_surveySubmittedFragment)
         }
+    }
+    private fun getUserComments() : String{
+        return binding.commentsEditText.text.toString()
     }
 
 

@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.slider.Slider
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm2Binding
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 import org.brightmindenrichment.street_care.util.Extensions
 
 
@@ -70,6 +72,12 @@ class VisitFormFragment2 : Fragment() {
             sharedVisitViewModel.visitLog.peopleCount = count
            binding.tvNoOfPeople.text =sharedVisitViewModel.visitLog.peopleCount.toString()
 
+        }
+        binding.btnSubmitHere.setOnClickListener{
+            sharedVisitViewModel.saveVisitLog()
+            Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
+            sharedVisitViewModel.visitLog = VisitLog()
+            findNavController().navigate(R.id.action_visitFormFragment2_to_nav_visit)
         }
         binding.btnGoToPage3.setOnClickListener{
             goToNextScreen()

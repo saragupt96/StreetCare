@@ -23,6 +23,8 @@
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:text="@string/let_someone_know"
+            android:textSize="@dimen/text_size20"
+            android:padding="@dimen/padding_8dp"
             android:textStyle="bold" />
 
         <ImageView
@@ -31,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
+           android:padding="@dimen/padding_8dp"
             android:src="@drawable/ic_baseline_add_circle_24"
             tools:ignore="ContentDescription"/>
 
@@ -39,16 +42,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
-           >
+            android:layout_marginTop="24dp"
+            android:visibility="gone"  >
 
             <TextView
                 android:id="@+id/tv_let_someone_know"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size20"
+                android:padding="@dimen/padding_8dp"
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
@@ -68,7 +70,9 @@
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:text="@string/how_to_prepare"
-            android:textStyle="bold" />
+            android:padding="@dimen/padding_8dp"
+            android:textSize="@dimen/text_size20"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/image_how_to_prepare"
@@ -77,21 +81,23 @@
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_baseline_add_circle_24"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription"
+            android:padding="@dimen/padding_8dp"/>
 
         <LinearLayout
             android:id="@+id/linearlayout_how_to_prepare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="8dp"
+            android:layout_marginTop="@dimen/margin_24dp"
             android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_how_to_prepare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size20"
+                android:padding="@dimen/padding_8dp"
                 android:layout_marginTop="16dp"/>
 
         </LinearLayout>
@@ -111,6 +117,8 @@
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:text="@string/must_carry"
+            android:textSize="@dimen/text_size20"
+            android:padding="@dimen/padding_8dp"
             android:textStyle="bold" />
 
         <ImageView
@@ -119,6 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
+            android:padding="@dimen/padding_8dp"
             android:src="@drawable/ic_baseline_add_circle_24"
             tools:ignore="ContentDescription"/>
 
@@ -127,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="8dp"
+           android:layout_marginTop="@dimen/margin_24dp"
             android:visibility="gone">
 
             <TextView
@@ -135,7 +144,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textSize="16sp"/>
+                android:padding="@dimen/padding_8dp"
+                android:textSize="@dimen/text_size20"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -154,6 +164,8 @@
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:text="@string/plan_an_intro"
+            android:textSize="@dimen/text_size20"
+            android:padding="@dimen/padding_8dp"
             android:textStyle="bold" />
 
         <ImageView
@@ -162,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
+            android:padding="@dimen/padding_8dp"
             android:src="@drawable/ic_baseline_add_circle_24"
             tools:ignore="ContentDescription"/>
 
@@ -169,7 +182,7 @@
             android:id="@+id/linearlayout_plan_an_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="@dimen/margin_24dp"
             android:orientation="vertical"
             android:visibility="gone">
 
@@ -178,7 +191,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textSize="16sp"/>
+                android:padding="@dimen/padding_8dp"
+                android:textSize="@dimen/text_size20"/>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
