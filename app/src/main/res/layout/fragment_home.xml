@@ -21,13 +21,15 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="4dp"
             android:textStyle="bold"
-
+            android:textColor="@color/gray700"
             android:text="@string/howtohelp_hot_to_help"
             android:textSize="@dimen/how_to_help" />
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/slider_view"
             android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:layout_height="280dp"
             app:sliderIndicatorEnabled="true"
             app:sliderIndicatorGravity="center_horizontal|bottom"
@@ -45,7 +47,7 @@
             android:layout_margin="4dp"
             android:paddingLeft="10dp"
             android:text="@string/howtohelp_toolkit_to_help"
-            android:textColor="@color/gray700"
+            android:textColor="@color/gray600"
             android:textSize="@dimen/home_screen_toolkit_to_help" />
 
         <include

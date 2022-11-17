@@ -85,7 +85,7 @@
     <string name="api_key">AIzaSyDjWi5sE_do337K32ie9iZ7xdBjqGgTA54</string>
     <string name="enter_date">Select your Visited Date</string>
     <string name="when_was_visit">When was your visit?</string>
-    <string name="no_log_message">You have not filled out any visit logs.Therefore none are available for display</string>
+    <string name="no_log_message">You have not filled out any visit logs. Therefore none are available for display</string>
     <string name="page_1_visit_content">Please fill out this (optional) form each time you go out. This help us build Street Care to bring more services to you and the community!</string>
     <string name="outreach_quiz1">Hours spent on outreach?</string>
     <string name="outreach_quiz2">Can you perform outreach again?</string>
