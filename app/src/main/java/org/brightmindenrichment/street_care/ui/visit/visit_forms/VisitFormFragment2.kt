@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.slider.Slider
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm2Binding
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 import org.brightmindenrichment.street_care.util.Extensions
 
 
@@ -24,9 +26,6 @@ class VisitFormFragment2 : Fragment() {
     private var _binding : FragmentVisitForm2Binding? = null
     val binding get() = _binding!!
     private val sharedVisitViewModel : VisitViewModel by activityViewModels()
-    private var outreach : String? = null
-    private var peopleCount = 0L
-    private var click: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,57 +43,59 @@ class VisitFormFragment2 : Fragment() {
 
         binding.rangeSlider.addOnChangeListener(Slider.OnChangeListener { slider, value, fromUser ->
             // setting the hourly spent time for outreach
-            binding.tvHours.text = getString(R.string.hours_spent,Extensions.floatToLong(value))
-            //hourSpentOnOutreach(Extensions.floatToLong(value))
-            sharedVisitViewModel.setHours(Extensions.floatToLong(value))
+            binding.tvHours.text = getString(R.string.hours_spent, Extensions.floatToLong(value))
+            sharedVisitViewModel.visitLog.hours = Extensions.floatToLong(value)
 
         })
+
         // setting outreach options
         binding.btnYes.setOnClickListener{
-            sharedVisitViewModel.setVisitAgain(getString(R.string.yes))
+            sharedVisitViewModel.visitLog.visitAgain = getString(R.string.yes)
 
         }
         binding.btnNo.setOnClickListener{
-            sharedVisitViewModel.setVisitAgain(getString(R.string.no))
+            sharedVisitViewModel.visitLog.visitAgain = getString(R.string.no)
 
         }
         binding.btnUndecided.setOnClickListener{
-            sharedVisitViewModel.setVisitAgain(getString(R.string.undecided))
+            sharedVisitViewModel.visitLog.visitAgain = getString(R.string.undecided)
 
         }
-
         binding.increaseNoOfPeople.setOnClickListener{
-        peopleCount = sharedVisitViewModel.increment()
-            sharedVisitViewModel.setPeopleCount(peopleCount)
-            //setText()
-            binding.tvNoOfPeople.text = sharedVisitViewModel.peopleCount.value.toString()
-        }
+            val count = sharedVisitViewModel.increment(sharedVisitViewModel.visitLog.peopleCount)
+            sharedVisitViewModel.visitLog.peopleCount = count
+            binding.tvNoOfPeople.text =sharedVisitViewModel.visitLog.peopleCount.toString()
 
+        }
         binding.decreaseNoOfPeople.setOnClickListener{
-            peopleCount = sharedVisitViewModel.decrement()
-            sharedVisitViewModel.setPeopleCount(peopleCount)
-            //setText()
-            binding.tvNoOfPeople.text = sharedVisitViewModel.peopleCount.value.toString()
+           val count = sharedVisitViewModel.decrement(sharedVisitViewModel.visitLog.peopleCount)
+            sharedVisitViewModel.visitLog.peopleCount = count
+           binding.tvNoOfPeople.text =sharedVisitViewModel.visitLog.peopleCount.toString()
+
+        }
+        binding.btnSubmitHere.setOnClickListener{
+            sharedVisitViewModel.saveVisitLog()
+            Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
+            sharedVisitViewModel.visitLog = VisitLog()
+            findNavController().navigate(R.id.action_visitFormFragment2_to_nav_visit)
         }
         binding.btnGoToPage3.setOnClickListener{
             goToNextScreen()
         }
 
     }
+    override fun onResume() {
+        super.onResume()
+        binding.tvNoOfPeople.text = sharedVisitViewModel.visitLog.peopleCount.toString()
 
-    private fun hourSpentOnOutreach( spentHour : Long){
-        sharedVisitViewModel.setHours(spentHour)
     }
+
 
     private fun goToNextScreen(){
         findNavController().navigate(R.id.action_visitFormFragment2_to_visitFormFragment3)
     }
 
 
-    private fun setText(){
-
-        binding.tvNoOfPeople.text = sharedVisitViewModel.peopleCount.value.toString()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

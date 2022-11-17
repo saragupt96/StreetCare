@@ -4,12 +4,12 @@ import java.util.*
 
  class VisitLog {
 
-    var location: String? = null
+    var location: String = ""
     var date: Date = Calendar.getInstance().time
-    var hours: Long? = null
-    var visitAgain: String? = null
-    var peopleCount: Long? = null
-    var experience: String? = null
-    var comments: String? = null
+    var hours: Long? = 0L
+    var visitAgain: String = ""
+    var peopleCount: Long = 0L
+    var experience: String = ""
+    var comments: String = ""
 
 }

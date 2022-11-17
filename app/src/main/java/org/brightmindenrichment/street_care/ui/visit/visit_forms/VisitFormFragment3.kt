@@ -1,5 +1,7 @@
 package org.brightmindenrichment.street_care.ui.visit.visit_forms
 
+
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm3Binding
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 
 
 class VisitFormFragment3 : Fragment() {
@@ -28,19 +31,42 @@ class VisitFormFragment3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSatisfied.setOnClickListener{
-            sharedVisitViewModel.setExperience(getString(R.string.satisfied))
+            sharedVisitViewModel.visitLog.experience = getString(R.string.satisfied)
+            binding.btnSatisfied.setBackgroundColor(Color.YELLOW)
+            binding.btnNeutral.setBackgroundColor(Color.GRAY)
+            binding.btnDissatisfied.setBackgroundColor(Color.GRAY)
         }
+
         binding.btnNeutral.setOnClickListener{
-            sharedVisitViewModel.setExperience(getString(R.string.neutral))
+            sharedVisitViewModel.visitLog.experience = getString(R.string.neutral)
+            binding.btnNeutral.setBackgroundColor(Color.YELLOW)
+            binding.btnSatisfied.setBackgroundColor(Color.GRAY)
+            binding.btnDissatisfied.setBackgroundColor(Color.GRAY)
+
+
         }
+
         binding.btnDissatisfied.setOnClickListener{
-            sharedVisitViewModel.setExperience(getString(R.string.dissatisfied))
+            sharedVisitViewModel.visitLog.experience = getString(R.string.dissatisfied)
+            binding.btnDissatisfied.setBackgroundColor(Color.YELLOW)
+            binding.btnNeutral.setBackgroundColor(Color.GRAY)
+            binding.btnSatisfied.setBackgroundColor(Color.GRAY)
         }
-        binding.btnGoToPage4.setOnClickListener{
-           // println("Outreach experience =----------${sharedVisitViewModel.experience}")
-            findNavController().navigate(R.id.action_visitFormFragment3_to_visitFormFragment4)
+
+
+
+        binding.btnSubmitVisit.setOnClickListener{
+            sharedVisitViewModel.visitLog.comments = getUserComments()
+            sharedVisitViewModel.saveVisitLog()
+            sharedVisitViewModel.visitLog = VisitLog()
+            findNavController().navigate(R.id.action_visitFormFragment3_to_surveySubmittedFragment)
         }
     }
+    private fun getUserComments() : String{
+        return binding.commentsEditText.text.toString()
+    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
