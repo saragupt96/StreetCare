@@ -11,7 +11,12 @@ class YouTubeController {
 
     var playlist: Playlist? = null
 
-
+    val size: Int get() {
+        if (playlist != null) {
+            return playlist!!.items.size
+        }
+        return 0
+    }
 
     fun refresh(playlistId: String, errorHandler: CoroutineExceptionHandler, completion: () -> Unit) {
 
@@ -25,5 +30,14 @@ class YouTubeController {
         }
     }
 
+    fun itemAtIndex(index: Int) : Item? {
+
+        if (playlist != null) {
+            if ((index >= 0) && (index <= this.size)) {
+                return playlist!!.items[index]
+            }
+        }
+        return null
+    }
 
 } // end class

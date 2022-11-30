@@ -1,25 +1,33 @@
 package org.brightmindenrichment.street_care.YouTube
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineExceptionHandler
 import org.brightmindenrichment.street_care.R
+import org.brightmindenrichment.street_care.databinding.FragmentYouTubeListBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_VIDEO_ID = "videoId"
+
 
 /**
  * A simple [Fragment] subclass.
  * Use the [YouTubeListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class YouTubeListFragment : Fragment() {
+class YouTubeListFragment : Fragment(), YouTubeListRecyclerAdapter.YouTubeRecyclerAdapterDelegate {
+
+    private var _binding : FragmentYouTubeListBinding? = null
+    val binding get() = _binding!!
 
     private var paramVideoId: String? = null
     var controller = YouTubeController()
@@ -29,21 +37,30 @@ class YouTubeListFragment : Fragment() {
         arguments?.let {
             paramVideoId = it.getString(ARG_VIDEO_ID)
         }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        _binding = FragmentYouTubeListBinding.inflate(inflater, container, false)
+        return _binding!!.root
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_you_tube_list, container, false)
+        //return inflater.inflate(R.layout.fragment_you_tube_list, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("BME", "Got video Id ${paramVideoId}")
+        updateUI()
+    }
+
+
+    private fun createErrorHandler() : CoroutineExceptionHandler {
 
         val errorHandler = CoroutineExceptionHandler { _, exception ->
             AlertDialog.Builder(requireContext()).setTitle("Error...")
@@ -53,20 +70,44 @@ class YouTubeListFragment : Fragment() {
                 .show()
         }
 
+        return errorHandler
+    }
+
+
+    fun updateUI() {
+
+        val errorHandler = createErrorHandler()
 
         if (paramVideoId != null) {
             controller.refresh(paramVideoId!!, errorHandler) {
 
                 var items = controller.playlist?.items
 
-                if (items != null) {
-                    for (i in items) {
-                        Log.d("BME", i.id)
-                    }
-                }
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.youTubeListRecyclerView)
+
+                recyclerView?.layoutManager = LinearLayoutManager(view?.context)
+                recyclerView?.adapter = YouTubeListRecyclerAdapter(controller, this)
+                
             }
         }
     }
+
+
+    override fun onItemClick(position: Int) {
+
+        val item = controller.itemAtIndex(position)
+
+        if (item != null) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("http://www.youtube.com/watch?v=${item.contentDetails.videoId}")
+                )
+            )
+        }
+
+    }
+
 
 
     companion object {
