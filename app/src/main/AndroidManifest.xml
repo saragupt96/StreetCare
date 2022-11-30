@@ -8,9 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
-    <meta-data
+    <!--<meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="${MAPS_API_KEY}" />
+        android:value="${MAPS_API_KEY}" />-->
 
     <application
         android:allowBackup="true"
