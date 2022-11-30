@@ -116,7 +116,8 @@
     <string name="another_visit"> Add Another visit</string>
     <string name="log__your_visit"> Log your visit</string>
     <string name="log_visit_question">Would you like to \n Log your visit?</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

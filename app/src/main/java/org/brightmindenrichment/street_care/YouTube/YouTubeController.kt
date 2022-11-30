@@ -19,7 +19,7 @@ class YouTubeController {
         val coroutineScope = CoroutineScope(mainActivityJob + Dispatchers.Main)
 
         coroutineScope.launch(errorHandler) {
-            playlist = YouTubeDataAdapter().getPlaylist("PLh7GZtyt8qiLKwO_WoE0Vmcu6UMV1AtV9")
+            playlist = YouTubeDataAdapter().getPlaylist(playlistId)
 
             completion()
         }

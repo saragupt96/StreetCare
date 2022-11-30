@@ -28,7 +28,7 @@ class YouTubeDataAdapter {
     suspend fun getPlaylist(playListId: String) : Playlist {
         val key = "AIzaSyAV5713sUQ-j8KxDjuPGtyVq1aQY1iJkuY"
         val part = "id,contentDetails,snippet"
-        val playlistId = "PLh7GZtyt8qiLKwO_WoE0Vmcu6UMV1AtV9"
+        val playlistId = playListId
         return service.playlistItems(key, part, playlistId)
     }
 }
