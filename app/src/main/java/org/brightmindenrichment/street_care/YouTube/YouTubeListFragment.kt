@@ -87,7 +87,7 @@ class YouTubeListFragment : Fragment(), YouTubeListRecyclerAdapter.YouTubeRecycl
 
                 recyclerView?.layoutManager = LinearLayoutManager(view?.context)
                 recyclerView?.adapter = YouTubeListRecyclerAdapter(controller, this)
-                
+
             }
         }
     }

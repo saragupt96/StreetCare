@@ -45,8 +45,7 @@
             android:textStyle="bold" />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="3dp">
+            android:layout_height="wrap_content">
 
         <fragment android:id="@+id/autocomplete_fragment"
             android:layout_width="match_parent"
