@@ -1,5 +1,6 @@
 package org.brightmindenrichment.street_care.ui.user
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,25 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineExceptionHandler
 import org.brightmindenrichment.street_care.R
-import org.brightmindenrichment.street_care.YouTube.YouTubeController
+import org.brightmindenrichment.street_care.ui.community.Event
+import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
+import java.util.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UserFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class UserFragment : Fragment() {
 
     private var currentUser: FirebaseUser? = null
@@ -35,7 +33,9 @@ class UserFragment : Fragment() {
     private lateinit var buttonSignUp: Button
     private lateinit var buttonRemoveAccount: Button
     private lateinit var buttonSignOut: Button
+    private lateinit var buttonEvent: Button
     private lateinit var textViewWelcome: TextView
+    var events: MutableList<Event> = mutableListOf()
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -60,39 +60,41 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // grab the logged in user, if there is one
-        currentUser = Firebase.auth.currentUser
-
         buttonLogin = view.findViewById<Button>(R.id.user_button_login)
         buttonSignUp = view.findViewById<Button>(R.id.user_button_sign_up)
         buttonRemoveAccount = view.findViewById<Button>(R.id.user_button_remove_account)
         buttonSignOut = view.findViewById<Button>(R.id.user_button_sign_out)
+        buttonEvent = view.findViewById<Button>(R.id.btnEvents)
         textViewWelcome = view.findViewById<TextView>(R.id.textViewWelcome)
-
-
+        buttonEvent.visibility = View.GONE
+        // grab the logged in user, if there is one
+        currentUser = Firebase.auth.currentUser
+        if (currentUser == null)
+            findNavController().navigate(R.id.action_nav_user_to_nav_login)
+        else
         // setup click listeners
-        buttonLogin.setOnClickListener {
-            buttonLoginOnClick()
-        }
-
-        buttonSignOut.setOnClickListener {
-            buttonSignOutOnClick()
-        }
-
+            buttonLogin.setOnClickListener {
+                buttonLoginOnClick()
+            }
         buttonSignUp.setOnClickListener {
             buttonSignUpOnClick()
         }
-
-
+        buttonSignOut.setOnClickListener {
+            buttonSignOutOnClick()
+        }
         buttonRemoveAccount.setOnClickListener {
             buttonRemoveAccountOnClick()
         }
-
+        buttonEvent.setOnClickListener {
+            buttonEventOnClick()
+        }
         updateUI()
     }
 
+    private fun buttonEventOnClick() {
+        findNavController().navigate(R.id.pendingEvents)
 
+    }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
@@ -104,28 +106,6 @@ class UserFragment : Fragment() {
 
 
     private fun buttonRemoveAccountOnClick() {
-
-
-//        var controller = YouTubeController()
-//
-//        val errorHandler = CoroutineExceptionHandler { _, exception ->
-//            AlertDialog.Builder(this.requireContext()).setTitle("Error...")
-//                .setMessage(exception.message)
-//                .setPositiveButton(android.R.string.ok) { _, _ -> }
-//                .setIcon(android.R.drawable.ic_dialog_alert)
-//                .show()
-//        }
-//        controller.refresh("PLh7GZtyt8qiLKwO_WoE0Vmcu6UMV1AtV9", errorHandler) {
-//            Log.d("BME", "Got data from youtube")
-//
-//            if (controller.playlist != null) {
-//                for (item in controller.playlist!!.items) {
-//                    Log.d("BME", item.snippet.title)
-//                    Log.d("BME", item.contentDetails.videoId)
-//                    Log.d("BME", item.snippet.thumbnails.standard.url)
-//                }
-//            }
-//        }
         currentUser?.delete()?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 currentUser = null
@@ -135,18 +115,12 @@ class UserFragment : Fragment() {
     }
 
 
-
     private fun buttonLoginOnClick() {
         findNavController().navigate(R.id.action_nav_user_to_nav_login)
     }
-
-
     private fun buttonSignUpOnClick() {
         findNavController().navigate(R.id.action_nav_user_to_nav_sign_up)
     }
-
-
-
     private fun buttonSignOutOnClick() {
         if (currentUser != null) {
             Firebase.auth.signOut()
@@ -156,47 +130,48 @@ class UserFragment : Fragment() {
         updateUI()
     }
 
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UserFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UserFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-
-
     fun updateUI() {
 
         if (currentUser != null) {
-            textViewWelcome.text = currentUser!!.displayName + " " + getString(R.string.welcome)
-
-            buttonLogin.visibility = View.GONE
-            buttonSignUp.visibility = View.GONE
+            readUserdata()
+           buttonLogin.visibility = View.GONE
+           buttonSignUp.visibility = View.GONE
             buttonRemoveAccount.visibility = View.VISIBLE
             buttonSignOut.visibility = View.VISIBLE
-        }
-        else {
-            textViewWelcome.text = getString(R.string.welcome)
+            Log.d("BME::", currentUser.toString())
+
+
+        } else {
+
+            findNavController().navigate(R.id.action_nav_user_to_nav_login)
+           /* textViewWelcome.text = getString(R.string.welcome)
+            buttonEvent.visibility = View.GONE
             buttonLogin.visibility = View.VISIBLE
             buttonSignUp.visibility = View.VISIBLE
+            buttonEvent.visibility = View.GONE
             buttonRemoveAccount.visibility = View.GONE
-            buttonSignOut.visibility = View.GONE
+            buttonSignOut.visibility = View.GONE*/
         }
     }
 
+    private fun readUserdata() {
+        val user = Firebase.auth.currentUser ?: return
+        Log.d("BME", user.uid)
+        val db = Firebase.firestore
+        db.collection("users").whereEqualTo("uid", user.uid).get().addOnSuccessListener { result ->
+            for (document in result) {
+                var user = Users()
+                user.email = document.get("email").toString()
+                user.organization = document.get("organization").toString()
+                user.role = document.get("role").toString()
+                user.username = document.get("username").toString()
+                textViewWelcome.text = "WELCOME " + user.username.toString()
+                if (user.role == "admin") {
+                    buttonEvent.visibility = View.VISIBLE
+                } else
+                    buttonEvent.visibility = View.GONE
+
+            }
+        }
+    }
 } // end class

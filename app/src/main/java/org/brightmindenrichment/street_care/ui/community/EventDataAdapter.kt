@@ -34,9 +34,6 @@ class EventDataAdapter {
     var events: MutableList<Event> = mutableListOf()
 
     val size: Int get() { return events.size }
-
-
-
     fun getEventAtPosition(position: Int): Event? {
 
         if ((position >=0) && (position < events.size)) {
@@ -45,35 +42,6 @@ class EventDataAdapter {
 
         return null
     }
-
-
-
-    fun addEvent(title: String, description: String, date: Date, onComplete: () -> Unit) {
-
-        // make sure somebody is logged in
-        val user = Firebase.auth.currentUser ?: return
-
-        // create a map of event data so we can add to firebase
-        val eventData = hashMapOf(
-            "title" to title,
-            "description" to description,
-            "date" to date,
-            "interest" to 1,
-            "uid" to user.uid
-        )
-
-        // save to firebase
-        val db = Firebase.firestore
-        db.collection("events").add(eventData).addOnSuccessListener { documentReference ->
-            Log.d("BME", "Saved with id ${documentReference.id}")
-            onComplete()
-        } .addOnFailureListener { exception ->
-            Log.w("BMR", "Error in addEvent ${exception.toString()}")
-            onComplete()
-        }
-    }
-
-
 
     fun setLikedEvent(eventId: String, doesLike: Boolean, onComplete: () -> Unit) {
 
@@ -117,7 +85,7 @@ class EventDataAdapter {
 
         val db = Firebase.firestore
 
-        db.collection("events").get().addOnSuccessListener { result ->
+        db.collection("events").whereEqualTo("status", "Approved").get().addOnSuccessListener { result ->
 
             this.events.clear()
 
@@ -129,11 +97,9 @@ class EventDataAdapter {
                 event.title = document.get("title").toString()
                 event.description = document.get("description").toString()
                 event.uid = document.get("uid").toString()
-
-                val dt = document.get("date") as com.google.firebase.Timestamp
-                if (dt != null) {
-                    event.date = dt.toDate()
-                }
+                event.location=document.get("location").toString()
+                event.time=document.get("time").toString()
+                event.date=document.get("date").toString()
 
                 this.events.add(event)
             }

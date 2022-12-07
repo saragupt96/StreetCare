@@ -1,17 +1,22 @@
 package org.brightmindenrichment.street_care.ui.user
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoginFragment : Fragment() {
+class   LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -52,7 +57,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonLogin = view.findViewById<Button>(R.id.loginButton)
+            val buttonLogin = view.findViewById<Button>(R.id.loginButton)
 
         buttonLogin.setOnClickListener {
 
@@ -68,15 +73,65 @@ class LoginFragment : Fragment() {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            val user = auth.currentUser
-                            findNavController().navigateUp()
+                            Toast.makeText(activity, "Successfully Login", Toast.LENGTH_SHORT).show();
+                           textEmail.text.clear()
+                            textPassword.text.clear()
+                            findNavController().navigate(R.id.nav_user)
                         } else {
                             Toast.makeText(activity, getString(R.string.error_login_failed), Toast.LENGTH_SHORT).show();
                         }
                     }
 
         }
+        val buttonSignup = view.findViewById<Button>(R.id.buttonSignUp)
+        buttonSignup.setOnClickListener {
+            findNavController().navigate(R.id.nav_sign_up)
+        }
 
+        val txtForgot=view.findViewById<TextView>(R.id.txtforget)
+        txtForgot.setOnClickListener {
+            showRecoverPasswordDialog();
+
+
+        }
+    }
+
+    private fun showRecoverPasswordDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Recover Password")
+
+        val editText=EditText(context)
+        editText.setHint("Enter Email")
+        editText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        builder.setView(editText)
+        editText.setPadding(10,10,10,10)
+        builder.setPositiveButton("Submit", DialogInterface.OnClickListener { dialog, which ->
+            // Here you get get input text from the Edittext
+            var m_Text = editText.text.toString()
+            beginRecovery(m_Text);
+        })
+        builder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+
+        builder.show()
+
+    }
+
+    private fun beginRecovery(mText: String) {
+        auth = Firebase.auth
+        auth.sendPasswordResetEmail(mText)
+            .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+
+                if (task.isSuccessful) {
+                    // if isSuccessful then done message will be shown
+                    // and you can change the password
+                    Toast.makeText(context, "Done sent", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(context, "Error Occurred", Toast.LENGTH_LONG).show()
+                }
+            }).addOnFailureListener(OnFailureListener {
+
+                Toast.makeText(context, "Error Failed", Toast.LENGTH_LONG).show()
+            })
     }
 
 
