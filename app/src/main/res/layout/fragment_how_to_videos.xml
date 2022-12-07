@@ -8,128 +8,28 @@
     android:orientation="vertical"
     tools:context=".ui.home.how_to_videos.HowToVideosFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_street_outreach"
+    <Button
+        android:id="@+id/buttonHowToIntro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#FFFF"
-        app:cardCornerRadius="8dp"
-        app:cardMaxElevation="8dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingLeft="8dp"
-        app:contentPaddingTop="8dp">
+        android:text="@string/intro_to_street_outreach" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/intro_to_street_outreach"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingTop="4dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            tools:ignore="ContentDescription" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_homeless_veterans"
+    <Button
+        android:id="@+id/buttonHowToVets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#FFFF"
-        app:cardCornerRadius="8dp"
-        app:cardMaxElevation="8dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingLeft="8dp"
-        app:contentPaddingTop="8dp">
+        android:text="@string/homeless_veterans" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/homeless_veterans"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingTop="4dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            tools:ignore="ContentDescription" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_street_safety"
+    <Button
+        android:id="@+id/buttonHowToSafety"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#FFFF"
-        app:cardCornerRadius="8dp"
-        app:cardMaxElevation="8dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingLeft="8dp"
-        app:contentPaddingTop="8dp">
+        android:text="@string/street_safety" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/street_safety"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingTop="4dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            tools:ignore="ContentDescription" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_mental_illness"
+    <Button
+        android:id="@+id/buttonHowToMentalIllness"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        app:cardBackgroundColor="#FFFF"
-        app:cardCornerRadius="8dp"
-        app:cardMaxElevation="8dp"
-        app:contentPaddingBottom="8dp"
-        app:contentPaddingLeft="8dp"
-        app:contentPaddingTop="8dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/mental_illness"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:paddingTop="4dp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            tools:ignore="ContentDescription" />
-
-    </androidx.cardview.widget.CardView>
+        android:text="@string/mental_illness" />
 
 </LinearLayout>

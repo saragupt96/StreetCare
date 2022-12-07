@@ -59,21 +59,24 @@ class VisitDataAdapter {
                 var visit = VisitLog()
 
                 visit.location = document.get("location").toString()
-                visit.hours = document.get("hoursSpentOnOutreach") as Long
+                visit.hours = (document.get("hoursSpentOnOutreach")  ?: 0L) as Long
                 visit.visitAgain = document.get("willPerformOutreachAgain").toString()
-                visit.peopleCount = document.get("helpers") as Long
+                visit.peopleCount = (document.get("helpers") ?: 0L) as Long
                 visit.experience = document.get("rating").toString()
                 visit.comments = document.get("comments").toString()
+
 
                 if (document.get("date") != null) {
                     val dt = document.get("date") as com.google.firebase.Timestamp
                     if (dt != null) {
                         visit.date = dt.toDate()
+
                     }
                 }
 
                 this.visits.add(visit)
             }
+            this.visits.sortByDescending { it.date }
 
 
             onComplete()
