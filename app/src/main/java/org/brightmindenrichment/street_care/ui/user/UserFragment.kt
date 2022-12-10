@@ -22,33 +22,22 @@ import org.brightmindenrichment.street_care.ui.community.Event
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 import java.util.*
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 class UserFragment : Fragment() {
-
-    private var currentUser: FirebaseUser? = null
-
+private var currentUser: FirebaseUser? = null
     private lateinit var buttonLogin: Button
     private lateinit var buttonSignUp: Button
     private lateinit var buttonRemoveAccount: Button
     private lateinit var buttonSignOut: Button
     private lateinit var buttonEvent: Button
     private lateinit var textViewWelcome: TextView
-    var events: MutableList<Event> = mutableListOf()
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,8 +45,6 @@ class UserFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonLogin = view.findViewById<Button>(R.id.user_button_login)
@@ -139,12 +126,9 @@ class UserFragment : Fragment() {
             buttonRemoveAccount.visibility = View.VISIBLE
             buttonSignOut.visibility = View.VISIBLE
             Log.d("BME::", currentUser.toString())
-
-
-        } else {
-
-            findNavController().navigate(R.id.action_nav_user_to_nav_login)
-           /* textViewWelcome.text = getString(R.string.welcome)
+     } else {
+        findNavController().navigate(R.id.nav_login)
+            /*textViewWelcome.text = getString(R.string.welcome)
             buttonEvent.visibility = View.GONE
             buttonLogin.visibility = View.VISIBLE
             buttonSignUp.visibility = View.VISIBLE
