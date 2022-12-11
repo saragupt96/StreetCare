@@ -130,6 +130,9 @@
         <action
             android:id="@+id/action_nav_start_now_to_afterFragment"
             app:destination="@id/afterFragment" />
+        <action
+            android:id="@+id/action_nav_start_now_to_howToVideosFragment"
+            app:destination="@id/howToVideosFragment" />
     </fragment>
 
     <fragment
