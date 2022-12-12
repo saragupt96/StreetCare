@@ -1,7 +1,6 @@
 package org.brightmindenrichment.street_care.ui.community
 
 import android.util.Log
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -10,7 +9,7 @@ import java.util.*
 
 
 /**
- // example addEvent
+// example addEvent
 //eventDataAdapter.addEvent("Food for Androids", "Feed all the android of the world.", Date()) {
 //    Log.d("BME", "Event added")
 //}
@@ -33,17 +32,21 @@ class EventDataAdapter {
 
     var events: MutableList<Event> = mutableListOf()
 
-    val size: Int get() { return events.size }
+    val size: Int
+        get() {
+            return events.size
+        }
+
     fun getEventAtPosition(position: Int): Event? {
 
-        if ((position >=0) && (position < events.size)) {
+        if ((position >= 0) && (position < events.size)) {
             return events[position]
         }
 
         return null
     }
 
-    fun setLikedEvent(eventId: String, doesLike: Boolean, onComplete: () -> Unit) {
+  /*  fun setLikedEvent(eventId: String, doesLike: Boolean, onComplete: () -> Unit) {
 
         // make sure somebody is logged in
         val user = Firebase.auth.currentUser ?: return
@@ -61,10 +64,10 @@ class EventDataAdapter {
                 Log.d("BME", "saved liked")
                 onComplete()
             }
-        }
-        else {
+        } else {
             // delete record of the like of this event for this user
-            db.collection("likedEvents").whereEqualTo("uid", user.uid).whereEqualTo("eventId", eventId).get().addOnSuccessListener { result ->
+            db.collection("likedEvents").whereEqualTo("uid", user.uid)
+                .whereEqualTo("eventId", eventId).get().addOnSuccessListener { result ->
                 for (document in result) {
                     db.collection("likedEvents").document(document.id).delete()
                 }
@@ -76,65 +79,61 @@ class EventDataAdapter {
                 }
         }
     }
-
+*/
 
     fun refresh(onComplete: () -> Unit) {
-
         // make sure somebody is logged in
-        val user = Firebase.auth.currentUser ?: return
-
+        // val user = Firebase.auth.currentUser ?: return
         val db = Firebase.firestore
+        db.collection("events").whereEqualTo("status", "Approved").get()
+            .addOnSuccessListener { result ->
+                this.events.clear()
+                for (document in result) {
+                    var event = Event()
+                    event.eventId = document.id
+                    event.title = document.get("title").toString()
+                    event.description = document.get("description").toString()
+                    event.uid = document.get("uid").toString()
+                    event.location = document.get("location").toString()
+                    event.time = document.get("time").toString()
+                    event.date = document.get("date").toString()
+                    this.events.add(event)
+                }
 
-        db.collection("events").whereEqualTo("status", "Approved").get().addOnSuccessListener { result ->
-
-            this.events.clear()
-
-            for (document in result) {
-                var event = Event()
-
-                event.eventId = document.id
-
-                event.title = document.get("title").toString()
-                event.description = document.get("description").toString()
-                event.uid = document.get("uid").toString()
-                event.location=document.get("location").toString()
-                event.time=document.get("time").toString()
-                event.date=document.get("date").toString()
-
-                this.events.add(event)
-            }
-
-            refreshedLiked {
+             //   refreshedLiked {
+                   onComplete()
+              //  }
+            }.addOnFailureListener { exceptioon ->
                 onComplete()
             }
-        }
     }
 
 
-    private fun refreshedLiked(onComplete: () -> Unit) {
+   /* private fun refreshedLiked(onComplete: () -> Unit) {
 
         // make sure somebody is logged in
         val user = Firebase.auth.currentUser ?: return
 
         val db = Firebase.firestore
 
-        db.collection("likedEvents").whereEqualTo("uid", user.uid).get().addOnSuccessListener { results ->
+        db.collection("likedEvents").whereEqualTo("uid", user.uid).get()
+            .addOnSuccessListener { results ->
 
-            for (document in results) {
-                for (event in this.events) {
-                    if (event.eventId == document.get("eventId").toString()) {
-                        event.liked = true
+                for (document in results) {
+                    for (event in this.events) {
+                        if (event.eventId == document.get("eventId").toString()) {
+                            event.liked = true
+                        }
                     }
                 }
-            }
 
-            onComplete()
-        }
+                onComplete()
+            }
             .addOnFailureListener { exceptioon ->
                 onComplete()
             }
 
-    }
+    }*/
 
 
 } // end class

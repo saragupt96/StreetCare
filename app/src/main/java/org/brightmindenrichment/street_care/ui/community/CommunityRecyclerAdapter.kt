@@ -22,34 +22,19 @@ class CommunityRecyclerAdapter(private val controller: EventDataAdapter) :
         val textViewCommunityLocation: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityLocation)
         val textViewCommunityTime: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityTime)
 
-        init {
-
-        }
     }
-
-
     override  fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_layout, parent, false)
-
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_layout, parent, false)
         return  ViewHolder(view)
     }
-
-
-
     override fun getItemCount(): Int {
         return controller.size
     }
-
-
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val event = controller.getEventAtPosition(position)
-
         if (event != null) {
-            holder.textViewTitle.text = event.title.orEmpty()
+            holder.textViewTitle.text = event.title
             holder.textViewDescription.text = event.description.orEmpty()
             holder.textViewCommunityLocation.text=event.location.orEmpty()
             holder.textViewCommunityTime.text=event.time.orEmpty()

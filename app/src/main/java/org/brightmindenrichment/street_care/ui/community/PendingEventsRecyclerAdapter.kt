@@ -26,23 +26,15 @@ class PendingEventsRecyclerAdapter(private val controller: pendingEventAdapter)
         val txtTime: TextView = pendingEventList.findViewById(R.id.txtEventTime)
         val btnApproved: Button = pendingEventList.findViewById(R.id.btnApproved)
         val btnDecline:Button= pendingEventList.findViewById(R.id.btnDecline)
-        init {
 
-        }
     }
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.pendingeventlist, parent, false)
         return  ViewHolder(view)
     }
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val event = controller.getEventAtPosition(position)
-
         if (event != null) {
             val eventId= event.eventId
             holder.txtTitle.text = event.title
@@ -51,8 +43,7 @@ class PendingEventsRecyclerAdapter(private val controller: pendingEventAdapter)
             holder.txtDate.text = event.date
             holder.txtTime.text = event.time
             holder.btnApproved.setOnClickListener{
-
-                if (eventId != null) {
+            if (eventId != null) {
                     controller.updateEventList(eventId)
                     controller.refresh {  }
                 }
@@ -72,13 +63,9 @@ class PendingEventsRecyclerAdapter(private val controller: pendingEventAdapter)
             }
         }
     }
-
-
     override fun getItemCount(): Int {
         return controller.size
     }
-
-
-    }
+}
 
 
