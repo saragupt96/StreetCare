@@ -56,7 +56,7 @@ class StartNowFragment : Fragment() {
         }
 
         binding.buttonOnTheStreet.setOnClickListener {
-
+            findNavController().navigate(R.id.action_nav_start_now_to_howToVideosFragment)
         }
 
         binding.buttonAfter.setOnClickListener {

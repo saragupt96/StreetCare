@@ -9,9 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.ui.home.data.ItemsToGive
-import org.brightmindenrichment.street_care.ui.home.what_to_give.ItemToGiveAdapter.ItemsViewHolder
 
-class ItemToGiveAdapter(private val context: Context, private val dataset :List<ItemsToGive>) : RecyclerView.Adapter<ItemsViewHolder>(){
+class ItemToGiveAdapter(private val context: Context, private val dataset :List<ItemsToGive>) : RecyclerView.Adapter<ItemToGiveAdapter.ItemsViewHolder>(){
 
      class ItemsViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         val imageView : ImageView = view.findViewById(R.id.image_view_what_to_give)
