@@ -1,23 +1,25 @@
 package org.brightmindenrichment.street_care.ui.community
 
-import android.content.Intent
+import android.annotation.SuppressLint
+import android.app.Application
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toolbar
+import android.widget.*
+import androidx.core.view.marginTop
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
 
 
-
 class CommunityFragment : Fragment() {
-    private lateinit var buttonAdd: ImageButton
-
+    lateinit var buttonAdd: ImageButton
     private val eventDataAdapter = EventDataAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +34,30 @@ class CommunityFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_community, container, false)
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eventDataAdapter.refresh {
-            val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerCommunity)
-            recyclerView?.layoutManager = LinearLayoutManager(view?.context)
-            recyclerView?.adapter = CommunityRecyclerAdapter(eventDataAdapter)
+        if (Firebase.auth.currentUser == null) {
+            val layout = view.findViewById<LinearLayout>(R.id.root)
+            val textView = TextView(context)
+            //setting height and width
+            textView.layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            textView.text = "Events are only available for logged in Users"
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20f)
+            textView.setTextColor(Color.GRAY)
+            textView.setPadding(20, 20, 20, 20)
+            textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+            textView.gravity = Gravity.CENTER_VERTICAL
+            textView.isAllCaps=false
+            layout?.addView(textView)
         }
-
+      else{
+          eventDataAdapter.refresh {
+                val recyclerView = view?.findViewById<RecyclerView>(R.id.recyclerCommunity)
+                recyclerView?.layoutManager = LinearLayoutManager(view?.context)
+                recyclerView?.adapter = CommunityRecyclerAdapter(eventDataAdapter)
+            }
+        }
     }
 
     override fun onResume() {

@@ -13,11 +13,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
+import org.brightmindenrichment.street_care.ui.visit.visit_forms.VisitViewModel
+import org.brightmindenrichment.street_care.util.Extensions
 import java.util.*
 
 class AddEvent : Fragment() {
@@ -26,7 +29,6 @@ class AddEvent : Fragment() {
     lateinit var edtTime: EditText
     lateinit var edtDesc: EditText
     lateinit var edtLocation: EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -53,55 +55,55 @@ class AddEvent : Fragment() {
         val year = myCalendar.get(Calendar.YEAR)
         val month = myCalendar.get(Calendar.MONTH)
         val day = myCalendar.get(Calendar.DAY_OF_MONTH)
-         edtTime.setOnClickListener{
+        edtTime.setOnClickListener {
             val timePickerDialog = context?.let { it1 ->
                 TimePickerDialog(context,
+                    R.style.MyDatePickerDialogTheme,
                     OnTimeSetListener { view, hourOfDay, minute -> edtTime.setText("$hourOfDay:$minute") },
                     mHour,
                     mMinute,
-                    false)
+                    false
+                )
             }
             timePickerDialog?.show()
-
         }
-            edtDate.setOnClickListener {
-                val datePickerDialog = context?.let { it1 ->
-                DatePickerDialog(it1,
+        edtDate.setOnClickListener {
+            val datePickerDialog = context?.let { it1 ->
+                DatePickerDialog(it1, R.style.MyDatePickerDialogTheme,
                     { view, year, monthOfYear, dayOfMonth ->
                         val dat = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
                         edtDate.setText(dat)
-                    },year, month, day)
+                    }, year, month, day
+                )
             }
-                datePickerDialog?.show()
+            datePickerDialog?.show()
         }
         btnSubmit.setOnClickListener {
-            var title = edtTitle.text.toString()
-            var date = edtDate.text.toString()
-            var time = edtTime.text.toString()
-            var desc = edtDesc.text.toString()
-            var location = edtLocation.text.toString()
-            if (TextUtils.isEmpty(title) )
-            {
-                edtTitle.setError("Mandatory")
-            }else if(TextUtils.isEmpty(date)){
-                edtDate.setError("Mandatory")
-            }else if(TextUtils.isEmpty(time)){
-                edtTime.setError("Mandatory")
-            } else if (TextUtils.isEmpty(location)) {
-                edtLocation.setError("Mandatory")
-            }else if (TextUtils.isEmpty(desc) ){
-                edtDesc.setError("Mandatory")
-            }  else {
-                addEvent(title, desc, date, time, location)
+            if (Firebase.auth.currentUser == null) {
+                Extensions.showDialog(requireContext(), "Please Login before submit the Event", "Ok")
+            } else {
+                var title = edtTitle.text.toString()
+                var date = edtDate.text.toString()
+                var time = edtTime.text.toString()
+                var desc = edtDesc.text.toString()
+                var location = edtLocation.text.toString()
+                if (TextUtils.isEmpty(title)) {
+                    edtTitle.setError("Required")
+                } else if (TextUtils.isEmpty(date)) {
+                    edtDate.setError("Required")
+                } else if (TextUtils.isEmpty(time)) {
+                    edtTime.setError("Required")
+                } else if (TextUtils.isEmpty(location)) {
+                    edtLocation.setError("Required")
+                } else {
+                    addEvent(title, desc, date, time, location)
+                }
             }
         }
     }
-
     fun addEvent(title: String, description: String, date: String, time: String, location: String) {
-
         // make sure somebody is logged in
         val user = Firebase.auth.currentUser ?: return
-
         // create a map of event data so we can add to firebase
         val eventData = hashMapOf(
             "title" to title,
@@ -111,24 +113,22 @@ class AddEvent : Fragment() {
             "time" to time,
             "location" to location,
             "uid" to user.uid,
-            "status" to "pending"
-        )
-
+            "status" to "pending")
         // save to firebase
         val db = Firebase.firestore
         db.collection("events").add(eventData).addOnSuccessListener { documentReference ->
             Log.d("BME", "Saved with id ${documentReference.id}")
-            Toast.makeText(context, "Successfully Submitted", Toast.LENGTH_LONG).show()
+            Extensions.showDialog(requireContext(), "Event registered for Approval", "Ok")
             edtDate.text.clear()
             edtTime.text.clear()
             edtLocation.text.clear()
             edtDesc.text.clear()
             edtTitle.text.clear()
+            Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.nav_community)
         }.addOnFailureListener { exception ->
             Log.w("BMR", "Error in addEvent ${exception.toString()}")
             Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show()
         }
-
     }
 }
