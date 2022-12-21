@@ -35,7 +35,7 @@
             android:layout_marginTop="@dimen/margin_8dp"
             android:text="@string/outreach_quiz1"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size24"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -83,7 +83,7 @@
             android:layout_alignParentEnd="true"
             android:text="@string/outreach_quiz2"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size24"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
         <RadioGroup
             android:id="@+id/linearLayout_outreach_button"
@@ -137,7 +137,7 @@
             android:maxLines="1"
             android:text="@string/outreach_quiz3"
             android:textAlignment="center"
-            android:textSize="@dimen/text_size24"
+            android:textSize="@dimen/text_size20"
             android:textStyle="bold" />
 
         <LinearLayout

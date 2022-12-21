@@ -24,39 +24,22 @@ class Extensions {
             return dateFormat.format(date)
         }
 
-        fun showDialog(context : Context, message : String, textPositivebtn : String) {
+        fun showDialog(context : Context, title: String, message : String, textPositivebtn : String) {
             val builder = AlertDialog.Builder(context)
+            builder.setTitle(title)
             builder.setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton(textPositivebtn, DialogInterface.OnClickListener { dialog, id ->
+                .setPositiveButton(textPositivebtn, DialogInterface.OnClickListener { dialog, _ ->
                     dialog.cancel()
                 }
                 )
             val alert = builder.create()
-            alert.setTitle("Alert!")
             alert.show()
         }
 
 
     }
 
-
-
-
-
-    fun Context.createDialog(layout: Int, cancelable: Boolean, message : String): Dialog {
-        val dialog = Dialog(this, R.style.Theme_Dialog)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(layout)
-        dialog.window?.setGravity(Gravity.CENTER)
-        dialog.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.setCancelable(cancelable)
-        return dialog
-    }
 
 
 }

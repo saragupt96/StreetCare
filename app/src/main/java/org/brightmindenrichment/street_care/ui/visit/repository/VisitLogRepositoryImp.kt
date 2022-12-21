@@ -1,15 +1,12 @@
 package org.brightmindenrichment.street_care.ui.visit.repository
 
+
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FieldPath
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firestore.v1.StructuredQuery
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
+
 
 class VisitLogRepositoryImp : VisitLogRepository {
     var visits: MutableList<VisitLog> = mutableListOf()
@@ -60,7 +57,7 @@ class VisitLogRepositoryImp : VisitLogRepository {
             this.visits.clear()
 
             for (document in result) {
-                var visit = VisitLog()
+                val visit = VisitLog()
 
                 visit.location = document.get("location").toString()
                 visit.hours = document.get("hoursSpentOnOutreach") as Long

@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.slider.Slider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm2Binding
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
@@ -74,9 +76,13 @@ class VisitFormFragment2 : Fragment() {
 
         }
         binding.btnSubmitHere.setOnClickListener{
-            sharedVisitViewModel.saveVisitLog()
-            Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
-            sharedVisitViewModel.visitLog = VisitLog()
+            if(Firebase.auth.currentUser == null){
+                Extensions.showDialog(requireContext(), "Anonymous","Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
+            }else {
+                sharedVisitViewModel.saveVisitLog()
+                Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
+                sharedVisitViewModel.visitLog = VisitLog()
+            }
             findNavController().navigate(R.id.action_visitFormFragment2_to_nav_visit)
         }
         binding.btnGoToPage3.setOnClickListener{

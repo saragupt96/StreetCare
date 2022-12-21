@@ -24,7 +24,7 @@
     <fragment
         android:id="@+id/nav_visit"
         android:name="org.brightmindenrichment.street_care.ui.visit.VisitFragment"
-        android:label="Recent Visit Log"
+        android:label="Visit Log"
         tools:layout="@layout/fragment_visit" >
         <action
             android:id="@+id/action_nav_visit_to_visitFormFragment1"
@@ -34,7 +34,7 @@
     <fragment
         android:id="@+id/visitFormFragment1"
         android:name="org.brightmindenrichment.street_care.ui.visit.visit_forms.VisitFormFragment1"
-        android:label="Log YOUR Visit"
+        android:label="Log Your Visit"
         tools:layout="@layout/fragment_visit_form1" >
         <action
             android:id="@+id/action_visitFormFragment1_to_visitFormFragment2"
@@ -91,12 +91,12 @@
         android:id="@+id/nav_community"
         android:name="org.brightmindenrichment.street_care.ui.community.CommunityFragment"
         android:label="Community"
-        tools:layout="@layout/fragment_visit" />
+        tools:layout="@layout/fragment_community" />
 
     <fragment
         android:id="@+id/nav_user"
         android:name="org.brightmindenrichment.street_care.ui.user.UserFragment"
-        android:label="User"
+        android:label="Profile"
         tools:layout="@layout/fragment_user" >
         <action
             android:id="@+id/action_nav_user_to_nav_login"
@@ -144,7 +144,7 @@
     <fragment
         android:id="@+id/afterFragment"
         android:name="org.brightmindenrichment.street_care.ui.home.start_now.tabs.AfterFragment"
-        android:label="fragment_after"
+        android:label="Back"
         tools:layout="@layout/fragment_after" >
         <action
             android:id="@+id/action_afterFragment_to_visitFormFragment1"
@@ -154,7 +154,7 @@
     <fragment
         android:id="@+id/howToVideosFragment"
         android:name="org.brightmindenrichment.street_care.ui.home.how_to_videos.HowToVideosFragment"
-        android:label="How to Help"
+        android:label="Back"
         tools:layout="@layout/fragment_how_to_videos" >
 
         <action
@@ -176,7 +176,7 @@
     <fragment
         android:id="@+id/whatToGiveFragment"
         android:name="org.brightmindenrichment.street_care.ui.home.what_to_give.WhatToGiveFragment"
-        android:label="What to Give"
+        android:label="What to Bring and Give"
         tools:layout="@layout/fragment_what_to_give" />
 
 
