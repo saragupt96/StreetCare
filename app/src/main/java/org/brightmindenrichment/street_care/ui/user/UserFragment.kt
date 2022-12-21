@@ -56,9 +56,9 @@ private var currentUser: FirebaseUser? = null
         buttonEvent.visibility = View.GONE
         // grab the logged in user, if there is one
         currentUser = Firebase.auth.currentUser
-        if (currentUser == null)
-            findNavController().navigate(R.id.action_nav_user_to_nav_login)
-        else
+        //if (currentUser == null)
+          //  findNavController().navigate(R.id.action_nav_user_to_nav_login)
+        //else
         // setup click listeners
             buttonLogin.setOnClickListener {
                 buttonLoginOnClick()
@@ -127,14 +127,14 @@ private var currentUser: FirebaseUser? = null
             buttonSignOut.visibility = View.VISIBLE
             Log.d("BME::", currentUser.toString())
      } else {
-        findNavController().navigate(R.id.nav_login)
-            /*textViewWelcome.text = getString(R.string.welcome)
+//        findNavController().navigate(R.id.action_nav_user_to_nav_login)
+            textViewWelcome.text = getString(R.string.welcome)
             buttonEvent.visibility = View.GONE
             buttonLogin.visibility = View.VISIBLE
             buttonSignUp.visibility = View.VISIBLE
             buttonEvent.visibility = View.GONE
             buttonRemoveAccount.visibility = View.GONE
-            buttonSignOut.visibility = View.GONE*/
+            buttonSignOut.visibility = View.GONE
         }
     }
 
@@ -149,7 +149,7 @@ private var currentUser: FirebaseUser? = null
                 user.organization = document.get("organization").toString()
                 user.role = document.get("role").toString()
                 user.username = document.get("username").toString()
-                textViewWelcome.text = "WELCOME " + user.username.toString()
+                textViewWelcome.text = "Welcome " + user.username.toString()+","
                 if (user.role == "admin") {
                     buttonEvent.visibility = View.VISIBLE
                 } else

@@ -1,9 +1,13 @@
 package org.brightmindenrichment.street_care.ui.community
 
-import android.util.Log
-import com.google.firebase.auth.ktx.auth
+import android.util.*
+import android.widget.Toast
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import org.brightmindenrichment.street_care.util.Extensions
+import java.security.AccessControlContext
+import java.security.AccessController.getContext
+
 
 class pendingEventAdapter {
 
@@ -49,14 +53,15 @@ class pendingEventAdapter {
         return null
     }
 
-    fun updateEventList(eventId: String )
-    {
+    fun updateEventList(eventId: String ) {
         db.collection("events").document(eventId).update("status","Approved").addOnSuccessListener {
             this.events.clear()
             Log.d("BME", "Successfully Updated$eventId")
-            //adapter.notifyItemRemoved()
+
+
         }.addOnFailureListener {
             Log.w("BMEE","Fail Update$eventId")
+
         }
     }
 
@@ -68,4 +73,5 @@ class pendingEventAdapter {
             Log.w("BMEE","Fail Update$eventId")
         }
     }
+
 }

@@ -21,7 +21,6 @@ class CommunityRecyclerAdapter(private val controller: EventDataAdapter) :
         val textViewDescription: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityDescription)
         val textViewCommunityLocation: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityLocation)
         val textViewCommunityTime: TextView = communityItemView.findViewById<TextView>(R.id.textViewCommunityTime)
-
     }
     override  fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.event_list_layout, parent, false)
@@ -39,7 +38,6 @@ class CommunityRecyclerAdapter(private val controller: EventDataAdapter) :
             holder.textViewCommunityLocation.text=event.location.orEmpty()
             holder.textViewCommunityTime.text=event.time.orEmpty()
             holder.textViewSmallDate.text = event.date.orEmpty()
-
             }
 
         }
