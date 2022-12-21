@@ -19,6 +19,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.app
 import org.brightmindenrichment.street_care.R
 import org.brightmindenrichment.street_care.databinding.FragmentVisitForm1Binding
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
@@ -59,9 +62,13 @@ class VisitFormFragment1 : Fragment() {
         }
         binding.btnSubmitHere.setOnClickListener {
             if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
-                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
-            } else {
+                Extensions.showDialog(requireContext(), "Alert","Please fill your past visit date", "Ok")
+            } else if(Firebase.auth.currentUser ==null){
+
+                    Extensions.showDialog(requireContext(), "Anonymous","Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
+                }else{
                 sharedVisitViewModel.saveVisitLog()
+                Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
                 sharedVisitViewModel.visitLog = VisitLog()
                 findNavController().navigate(R.id.action_visitFormFragment1_to_nav_visit)
             }
@@ -70,7 +77,7 @@ class VisitFormFragment1 : Fragment() {
         binding.btnGoToPage2.setOnClickListener {
 
                 if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
-                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
+                Extensions.showDialog(requireContext(), "Alert","Please fill your past visit date", "Ok")
             } else {
                 findNavController().navigate(R.id.action_visitFormFragment1_to_visitFormFragment2)
             }
@@ -82,22 +89,22 @@ class VisitFormFragment1 : Fragment() {
 
     // autocomplete places API Using Fragment
     private fun searchLocation(){
-        val api_key = getString(R.string.api_key)
+        val apiKey = getString(R.string.api_key)
 
 
         // Initialize the SDK
         if (!Places.isInitialized()) {
-            Places.initialize(requireContext(), api_key)
+            Places.initialize(requireContext(), apiKey)
 
         }
         // Create a new PlacesClient instance
-        val placesClient = Places.createClient(requireActivity().applicationContext)
+        //val placesClient = Places.createClient(requireActivity().applicationContext)
 
         val autocompleteFragment : AutocompleteSupportFragment = childFragmentManager
             .findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 
         autocompleteFragment.setActivityMode(AutocompleteActivityMode.OVERLAY)
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME));
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
 
         // Set up a PlaceSelectionListener to handle the response.
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
@@ -117,7 +124,7 @@ class VisitFormFragment1 : Fragment() {
 
     private fun populateCalendarToSelectVisitDate() : Date{
         val date =
-            OnDateSetListener { view, year, month, day ->
+            OnDateSetListener { _, year, month, day ->
                 myCalendar.set(Calendar.YEAR, year)
                 myCalendar.set(Calendar.MONTH, month)
                 myCalendar.set(Calendar.DAY_OF_MONTH, day)
