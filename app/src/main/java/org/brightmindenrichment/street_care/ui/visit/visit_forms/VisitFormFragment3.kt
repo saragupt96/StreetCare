@@ -61,7 +61,7 @@ class VisitFormFragment3 : Fragment() {
 
         binding.btnSubmitVisit.setOnClickListener{
             if(Firebase.auth.currentUser ==null){
-                Extensions.showDialog(requireContext(), "Anonymous","Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
+                Extensions.showDialog(requireContext(),"Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
             }else {
                 sharedVisitViewModel.visitLog.comments = getUserComments()
                 sharedVisitViewModel.saveVisitLog()

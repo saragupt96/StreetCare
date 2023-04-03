@@ -1,6 +1,4 @@
 package org.brightmindenrichment.street_care.ui.visit.visit_forms
-
-
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.os.Bundle
@@ -9,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -27,8 +25,6 @@ import org.brightmindenrichment.street_care.databinding.FragmentVisitForm1Bindin
 import org.brightmindenrichment.street_care.ui.visit.data.VisitLog
 import org.brightmindenrichment.street_care.util.Extensions
 import java.util.*
-
-
 /*
  * A simple [Fragment] subclass.
  * Use the [VisitFormFragment1.newInstance] factory method to
@@ -62,10 +58,10 @@ class VisitFormFragment1 : Fragment() {
         }
         binding.btnSubmitHere.setOnClickListener {
             if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
-                Extensions.showDialog(requireContext(), "Alert","Please fill your past visit date", "Ok")
+                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
             } else if(Firebase.auth.currentUser ==null){
 
-                    Extensions.showDialog(requireContext(), "Anonymous","Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
+                    Extensions.showDialog(requireContext(), "Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
                 }else{
                 sharedVisitViewModel.saveVisitLog()
                 Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
@@ -77,7 +73,7 @@ class VisitFormFragment1 : Fragment() {
         binding.btnGoToPage2.setOnClickListener {
 
                 if (!sharedVisitViewModel.validateDate(sharedVisitViewModel.visitLog.date)) {
-                Extensions.showDialog(requireContext(), "Alert","Please fill your past visit date", "Ok")
+                Extensions.showDialog(requireContext(), "Please fill your past visit date", "Ok")
             } else {
                 findNavController().navigate(R.id.action_visitFormFragment1_to_visitFormFragment2)
             }

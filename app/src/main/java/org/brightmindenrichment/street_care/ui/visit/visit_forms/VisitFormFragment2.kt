@@ -1,7 +1,4 @@
 package org.brightmindenrichment.street_care.ui.visit.visit_forms
-
-
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,10 +33,7 @@ class VisitFormFragment2 : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentVisitForm2Binding.inflate(inflater,container,false)
         return binding.root
-
     }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -47,9 +41,7 @@ class VisitFormFragment2 : Fragment() {
             // setting the hourly spent time for outreach
             binding.tvHours.text = getString(R.string.hours_spent, Extensions.floatToLong(value))
             sharedVisitViewModel.visitLog.hours = Extensions.floatToLong(value)
-
         })
-
         // setting outreach options
         binding.btnYes.setOnClickListener{
             sharedVisitViewModel.visitLog.visitAgain = getString(R.string.yes)
@@ -77,7 +69,7 @@ class VisitFormFragment2 : Fragment() {
         }
         binding.btnSubmitHere.setOnClickListener{
             if(Firebase.auth.currentUser == null){
-                Extensions.showDialog(requireContext(), "Anonymous","Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
+                Extensions.showDialog(requireContext(), "Logging a visit without logging in may \n result in you, being unable to view your \n visit history.", "Ok")
             }else {
                 sharedVisitViewModel.saveVisitLog()
                 Toast.makeText(context, "Log saved successfully ", Toast.LENGTH_SHORT).show()
@@ -88,15 +80,11 @@ class VisitFormFragment2 : Fragment() {
         binding.btnGoToPage3.setOnClickListener{
             goToNextScreen()
         }
-
     }
     override fun onResume() {
         super.onResume()
         binding.tvNoOfPeople.text = sharedVisitViewModel.visitLog.peopleCount.toString()
-
     }
-
-
     private fun goToNextScreen(){
         findNavController().navigate(R.id.action_visitFormFragment2_to_visitFormFragment3)
     }
